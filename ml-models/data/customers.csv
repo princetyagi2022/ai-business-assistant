@@ -1,0 +1,11 @@
+﻿name,email,phone,company,segment,total_spent,order_count,days_since_last_order,churned
+Acme Corp,contact@acme.com,+1-555-0101,Acme Inc,enterprise,125000,48,12,0
+Beta LLC,info@beta.com,+1-555-0102,Beta LLC,smb,8500,6,95,1
+Gamma Systems,hello@gamma.com,+1-555-0103,Gamma Systems,enterprise,98000,35,8,0
+Delta Shop,shop@delta.com,+1-555-0104,Delta Retail,smb,3200,3,120,1
+Echo Tech,team@echo.com,+1-555-0105,Echo Tech,mid_market,42000,22,25,0
+Fox Industries,ops@fox.com,+1-555-0106,Fox Industries,enterprise,156000,62,5,0
+Green Foods,order@green.com,+1-555-0107,Green Foods,smb,2100,2,180,1
+Helix Labs,lab@helix.com,+1-555-0108,Helix Labs,mid_market,38500,18,30,0
+Iron Works,mail@iron.com,+1-555-0109,Iron Works,smb,5600,4,75,1
+Jet Logistics,ship@jet.com,+1-555-0110,Jet Logistics,enterprise,210000,88,3,0

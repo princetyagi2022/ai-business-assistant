@@ -1,0 +1,21 @@
+﻿date,category,description,amount,type
+2025-01-05,Sales,Product sales Q1,45000,revenue
+2025-01-10,Operations,Office rent,8500,expense
+2025-01-15,Marketing,Digital ads,3200,expense
+2025-01-20,Sales,Enterprise deal,28000,revenue
+2025-02-05,Payroll,January salaries,22000,expense
+2025-02-10,Sales,Retail sales,18500,revenue
+2025-02-15,Operations,Utilities,1200,expense
+2025-02-20,Marketing,Email campaign,1800,expense
+2025-03-01,Sales,Online sales,32000,revenue
+2025-03-10,Operations,Software licenses,4500,expense
+2025-03-15,Payroll,February salaries,22500,expense
+2025-03-20,Sales,Partner revenue,15000,revenue
+2025-04-05,Marketing,Trade show,6500,expense
+2025-04-10,Sales,Q2 opening sales,52000,revenue
+2025-04-20,Operations,Equipment repair,2100,expense
+2025-05-01,Payroll,April salaries,23000,expense
+2025-05-10,Sales,Subscription revenue,38000,revenue
+2025-05-15,Marketing,Social media ads,2900,expense
+2025-05-20,Operations,Cloud hosting,3800,expense
+2025-05-25,Sales,End of month sales,41000,revenue

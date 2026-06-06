@@ -1,0 +1,9 @@
+﻿name,email,role,department,status
+John Admin,admin@company.com,admin,IT,active
+Sarah Manager,sarah@company.com,manager,Sales,active
+Mike User,mike@company.com,user,Marketing,active
+Lisa HR,lisa@company.com,manager,HR,active
+Tom Support,tom@company.com,user,Support,active
+Emma Analyst,emma@company.com,user,Analytics,active
+David Finance,david@company.com,manager,Finance,active
+Anna Sales,anna@company.com,user,Sales,active

@@ -1,0 +1,11 @@
+﻿sku,name,category,price,stock,description,status
+SKU-001,Wireless Mouse,Electronics,29.99,150,Ergonomic wireless mouse,active
+SKU-002,Mechanical Keyboard,Electronics,89.99,80,RGB mechanical keyboard,active
+SKU-003,USB-C Hub,Electronics,45.50,200,7-in-1 USB-C hub,active
+SKU-004,Office Chair,Furniture,249.00,35,Ergonomic office chair,active
+SKU-005,Standing Desk,Furniture,599.00,20,Electric standing desk,active
+SKU-006,Notebook Pack,Stationery,12.99,500,A5 notebooks pack of 5,active
+SKU-007,Whiteboard,Office,75.00,45,Magnetic whiteboard 4x3,active
+SKU-008,Projector,Electronics,450.00,12,HD business projector,active
+SKU-009,Webcam HD,Electronics,65.00,90,1080p webcam,active
+SKU-010,Desk Lamp,Furniture,34.99,110,LED desk lamp,active

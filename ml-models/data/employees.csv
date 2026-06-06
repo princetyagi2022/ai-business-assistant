@@ -1,0 +1,11 @@
+﻿employee_id,name,department,role,hire_date,salary,performance_score
+EMP-001,Alice Johnson,Engineering,Developer,2022-03-15,85000,4.5
+EMP-002,Bob Smith,Sales,Sales Rep,2021-06-01,62000,4.2
+EMP-003,Carol White,Marketing,Manager,2020-01-10,95000,4.8
+EMP-004,Dan Brown,Finance,Analyst,2023-02-20,72000,4.0
+EMP-005,Eve Davis,HR,Coordinator,2022-08-05,58000,4.3
+EMP-006,Frank Miller,Engineering,Senior Dev,2019-11-12,110000,4.9
+EMP-007,Grace Lee,Sales,Manager,2018-04-22,98000,4.6
+EMP-008,Henry Wilson,Support,Agent,2023-07-01,48000,3.8
+EMP-009,Ivy Chen,Analytics,Data Analyst,2022-01-18,78000,4.4
+EMP-010,Jack Taylor,Operations,Manager,2017-09-30,102000,4.7
