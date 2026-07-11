@@ -8,6 +8,7 @@ import FormTextField from '@/components/forms/FormTextField';
 import FormSelect from '@/components/forms/FormSelect';
 import { userFormSchema } from '@/utils/validators';
 import { ROLES } from '@/utils/constants';
+import userService from '@/services/userService';
 
 const roleOptions = Object.entries(ROLES).map(([key, value]) => ({
   value,
@@ -28,7 +29,8 @@ const CreateUser = () => {
     defaultValues: { firstName: '', lastName: '', email: '', role: ROLES.USER, status: 'ACTIVE' },
   });
 
-  const onSubmit = async () => {
+  const onSubmit = async (values) => {
+    await userService.create(values);
     setSuccess(true);
     setTimeout(() => navigate('/users'), 1000);
   };
@@ -41,7 +43,7 @@ const CreateUser = () => {
       />
       <Card sx={{ maxWidth: 600 }}>
         <CardContent>
-          {success && <Alert severity="success" sx={{ mb: 2 }}>User created (demo)</Alert>}
+          {success && <Alert severity="success" sx={{ mb: 2 }}>User created</Alert>}
           <Box component="form" onSubmit={handleSubmit(onSubmit)}>
             <FormTextField name="firstName" control={control} label="First name" />
             <FormTextField name="lastName" control={control} label="Last name" />

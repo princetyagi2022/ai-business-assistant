@@ -1,4 +1,4 @@
-﻿date,category,description,amount,type
+date,category,description,amount,type
 2025-01-05,Sales,Product sales Q1,45000,revenue
 2025-01-10,Operations,Office rent,8500,expense
 2025-01-15,Marketing,Digital ads,3200,expense
@@ -19,3 +19,503 @@
 2025-05-15,Marketing,Social media ads,2900,expense
 2025-05-20,Operations,Cloud hosting,3800,expense
 2025-05-25,Sales,End of month sales,41000,revenue
+2025-05-28,Operations,Warehouse expense,27439,revenue
+2025-05-29,Sales,Subscription renewal,46523,revenue
+2025-05-30,Marketing,Brand promotion,73718,revenue
+2025-05-31,Sales,Subscription renewal,35221,revenue
+2025-06-02,Operations,Office supplies,21935,expense
+2025-06-05,Sales,Bulk product sale,76424,revenue
+2025-06-06,Payroll,Contractor payment,9364,expense
+2025-06-09,Marketing,Social media ads,17919,expense
+2025-06-10,Payroll,Contractor payment,93364,revenue
+2025-06-11,Payroll,Staff reimbursement,26262,expense
+2025-06-12,Marketing,Brand promotion,27921,expense
+2025-06-15,Sales,Subscription renewal,42012,revenue
+2025-06-16,Marketing,Email marketing,92797,revenue
+2025-06-19,Operations,Warehouse expense,66611,revenue
+2025-06-20,Marketing,SEO campaign,39344,expense
+2025-06-23,Sales,Retail sale,60639,revenue
+2025-06-24,Sales,Online order,27466,revenue
+2025-06-27,Operations,Utility payment,81119,revenue
+2025-06-29,Marketing,Email marketing,51667,revenue
+2025-07-02,Operations,Internet bill,68718,revenue
+2025-07-05,Payroll,Employee salaries,22853,revenue
+2025-07-06,Payroll,Contractor payment,74075,revenue
+2025-07-09,Marketing,Social media ads,83618,revenue
+2025-07-10,Operations,Equipment maintenance,46106,expense
+2025-07-13,Operations,Warehouse expense,44767,expense
+2025-07-15,Payroll,Employee salaries,16671,expense
+2025-07-16,Sales,Online order,24354,revenue
+2025-07-17,Operations,Warehouse expense,46613,expense
+2025-07-19,Operations,Internet bill,10051,expense
+2025-07-21,Sales,Online order,26715,revenue
+2025-07-23,Sales,Enterprise contract,89859,revenue
+2025-07-24,Sales,Enterprise contract,76027,revenue
+2025-07-25,Marketing,SEO campaign,9071,expense
+2025-07-28,Operations,Office supplies,20996,revenue
+2025-07-29,Marketing,Brand promotion,8219,expense
+2025-07-31,Payroll,Contractor payment,41089,expense
+2025-08-03,Operations,Utility payment,43268,expense
+2025-08-06,Payroll,Employee salaries,11636,expense
+2025-08-09,Marketing,Social media ads,70926,revenue
+2025-08-11,Operations,Utility payment,19953,expense
+2025-08-13,Sales,Enterprise contract,36125,revenue
+2025-08-14,Payroll,Employee salaries,41537,revenue
+2025-08-16,Sales,Bulk product sale,10430,revenue
+2025-08-19,Sales,Bulk product sale,34244,revenue
+2025-08-20,Marketing,Influencer campaign,27224,expense
+2025-08-23,Sales,Enterprise contract,55823,revenue
+2025-08-24,Payroll,Employee salaries,18992,revenue
+2025-08-25,Sales,Enterprise contract,96487,revenue
+2025-08-27,Payroll,Employee salaries,37930,expense
+2025-08-30,Sales,Online order,10693,revenue
+2025-08-31,Marketing,Brand promotion,92824,revenue
+2025-09-03,Payroll,Employee salaries,83023,revenue
+2025-09-05,Operations,Warehouse expense,41118,expense
+2025-09-08,Sales,Retail sale,93615,revenue
+2025-09-09,Operations,Utility payment,45874,expense
+2025-09-12,Payroll,Employee salaries,42244,expense
+2025-09-13,Payroll,Performance bonus,34148,expense
+2025-09-14,Operations,Warehouse expense,22569,expense
+2025-09-17,Marketing,Brand promotion,15071,revenue
+2025-09-19,Sales,Subscription renewal,81738,revenue
+2025-09-20,Sales,Online order,26248,revenue
+2025-09-23,Sales,Retail sale,50953,revenue
+2025-09-25,Operations,Equipment maintenance,24321,revenue
+2025-09-27,Operations,Internet bill,70427,revenue
+2025-09-29,Sales,Online order,42657,revenue
+2025-09-30,Sales,Bulk product sale,64007,revenue
+2025-10-03,Operations,Equipment maintenance,21276,expense
+2025-10-05,Operations,Warehouse expense,35166,expense
+2025-10-08,Marketing,SEO campaign,33636,expense
+2025-10-09,Sales,Bulk product sale,57631,revenue
+2025-10-11,Sales,Online order,84556,revenue
+2025-10-12,Operations,Internet bill,60165,revenue
+2025-10-15,Marketing,Influencer campaign,59185,revenue
+2025-10-16,Marketing,Social media ads,3653,expense
+2025-10-18,Payroll,Staff reimbursement,29503,revenue
+2025-10-21,Marketing,SEO campaign,35897,expense
+2025-10-24,Payroll,Performance bonus,46605,revenue
+2025-10-25,Sales,Bulk product sale,89255,revenue
+2025-10-26,Operations,Warehouse expense,49778,revenue
+2025-10-28,Sales,Enterprise contract,60964,revenue
+2025-10-29,Marketing,Brand promotion,18597,revenue
+2025-10-31,Operations,Office supplies,27277,expense
+2025-11-01,Operations,Warehouse expense,9243,expense
+2025-11-03,Payroll,Employee salaries,30314,expense
+2025-11-05,Operations,Warehouse expense,45179,expense
+2025-11-06,Payroll,Staff reimbursement,56037,revenue
+2025-11-07,Marketing,Email marketing,34159,revenue
+2025-11-09,Sales,Subscription renewal,70458,revenue
+2025-11-10,Sales,Online order,19807,revenue
+2025-11-12,Marketing,Brand promotion,15360,expense
+2025-11-15,Marketing,Influencer campaign,43452,revenue
+2025-11-16,Marketing,Social media ads,44303,expense
+2025-11-18,Payroll,Employee salaries,15237,expense
+2025-11-20,Operations,Utility payment,4028,expense
+2025-11-21,Operations,Utility payment,37363,expense
+2025-11-23,Operations,Internet bill,8691,expense
+2025-11-25,Payroll,Staff reimbursement,72012,revenue
+2025-11-26,Sales,Subscription renewal,50865,revenue
+2025-11-28,Marketing,Email marketing,15820,expense
+2025-11-30,Payroll,Employee salaries,7242,expense
+2025-12-02,Payroll,Performance bonus,4483,expense
+2025-12-04,Operations,Equipment maintenance,74418,revenue
+2025-12-05,Sales,Bulk product sale,59782,revenue
+2025-12-08,Marketing,Brand promotion,2659,expense
+2025-12-10,Sales,Subscription renewal,93647,revenue
+2025-12-13,Sales,Online order,89616,revenue
+2025-12-15,Sales,Subscription renewal,54209,revenue
+2025-12-16,Sales,Bulk product sale,58935,revenue
+2025-12-17,Payroll,Employee salaries,50982,revenue
+2025-12-20,Marketing,Social media ads,48804,revenue
+2025-12-21,Sales,Subscription renewal,18401,revenue
+2025-12-24,Operations,Equipment maintenance,33633,revenue
+2025-12-27,Operations,Internet bill,10415,expense
+2025-12-28,Operations,Internet bill,12188,expense
+2025-12-31,Payroll,Staff reimbursement,80435,revenue
+2026-01-03,Payroll,Staff reimbursement,57115,revenue
+2026-01-05,Operations,Warehouse expense,95835,revenue
+2026-01-07,Marketing,Influencer campaign,43841,revenue
+2026-01-10,Operations,Utility payment,75467,revenue
+2026-01-12,Marketing,Brand promotion,21478,revenue
+2026-01-13,Marketing,SEO campaign,29742,expense
+2026-01-14,Operations,Equipment maintenance,91228,revenue
+2026-01-17,Payroll,Performance bonus,68856,revenue
+2026-01-18,Sales,Retail sale,82586,revenue
+2026-01-20,Payroll,Employee salaries,14041,expense
+2026-01-22,Marketing,Social media ads,46735,revenue
+2026-01-23,Sales,Bulk product sale,68889,revenue
+2026-01-25,Payroll,Contractor payment,40714,expense
+2026-01-27,Marketing,SEO campaign,60256,revenue
+2026-01-30,Marketing,Influencer campaign,59786,revenue
+2026-02-02,Payroll,Staff reimbursement,49092,expense
+2026-02-03,Marketing,Email marketing,34427,revenue
+2026-02-04,Marketing,SEO campaign,23310,expense
+2026-02-07,Sales,Subscription renewal,35365,revenue
+2026-02-10,Sales,Bulk product sale,17943,revenue
+2026-02-13,Marketing,SEO campaign,45175,revenue
+2026-02-15,Operations,Internet bill,45641,expense
+2026-02-16,Marketing,SEO campaign,27465,expense
+2026-02-17,Sales,Retail sale,11980,revenue
+2026-02-19,Marketing,Social media ads,4459,expense
+2026-02-21,Operations,Utility payment,7066,expense
+2026-02-23,Marketing,SEO campaign,86154,revenue
+2026-02-24,Payroll,Staff reimbursement,45705,expense
+2026-02-26,Payroll,Employee salaries,20034,expense
+2026-02-27,Sales,Bulk product sale,78929,revenue
+2026-03-01,Marketing,Social media ads,79522,revenue
+2026-03-03,Payroll,Staff reimbursement,46423,expense
+2026-03-04,Payroll,Contractor payment,48959,expense
+2026-03-07,Sales,Enterprise contract,77859,revenue
+2026-03-09,Marketing,Social media ads,39449,expense
+2026-03-12,Sales,Online order,42605,revenue
+2026-03-14,Operations,Warehouse expense,68340,revenue
+2026-03-15,Marketing,Brand promotion,42980,revenue
+2026-03-16,Payroll,Employee salaries,28299,expense
+2026-03-19,Marketing,Email marketing,71497,revenue
+2026-03-20,Sales,Enterprise contract,61508,revenue
+2026-03-21,Marketing,SEO campaign,39120,revenue
+2026-03-23,Marketing,SEO campaign,9425,expense
+2026-03-24,Operations,Warehouse expense,82886,revenue
+2026-03-25,Marketing,Brand promotion,14743,expense
+2026-03-28,Sales,Bulk product sale,12775,revenue
+2026-03-29,Sales,Subscription renewal,99298,revenue
+2026-03-30,Sales,Subscription renewal,11445,revenue
+2026-04-01,Operations,Utility payment,7974,expense
+2026-04-02,Operations,Equipment maintenance,79390,revenue
+2026-04-04,Operations,Office supplies,39464,revenue
+2026-04-05,Marketing,Social media ads,37691,expense
+2026-04-06,Sales,Enterprise contract,39482,revenue
+2026-04-08,Payroll,Employee salaries,11211,revenue
+2026-04-10,Operations,Equipment maintenance,49321,expense
+2026-04-12,Payroll,Contractor payment,26623,revenue
+2026-04-15,Operations,Utility payment,6750,expense
+2026-04-17,Operations,Internet bill,85583,revenue
+2026-04-20,Payroll,Contractor payment,14544,revenue
+2026-04-22,Sales,Retail sale,46484,revenue
+2026-04-23,Sales,Enterprise contract,57741,revenue
+2026-04-24,Payroll,Employee salaries,30095,expense
+2026-04-26,Operations,Internet bill,37685,expense
+2026-04-28,Sales,Retail sale,44093,revenue
+2026-04-29,Marketing,Brand promotion,33062,expense
+2026-04-30,Payroll,Performance bonus,45550,revenue
+2026-05-01,Operations,Utility payment,40083,expense
+2026-05-02,Marketing,Brand promotion,28175,expense
+2026-05-03,Operations,Office supplies,34824,expense
+2026-05-05,Sales,Retail sale,14833,revenue
+2026-05-08,Sales,Enterprise contract,96283,revenue
+2026-05-10,Sales,Bulk product sale,80796,revenue
+2026-05-13,Sales,Enterprise contract,52063,revenue
+2026-05-15,Operations,Warehouse expense,21243,expense
+2026-05-18,Marketing,SEO campaign,38158,expense
+2026-05-21,Sales,Retail sale,60110,revenue
+2026-05-24,Marketing,Email marketing,16091,revenue
+2026-05-27,Payroll,Contractor payment,48365,expense
+2026-05-29,Marketing,SEO campaign,30345,revenue
+2026-05-31,Sales,Subscription renewal,32905,revenue
+2026-06-03,Payroll,Employee salaries,34107,expense
+2026-06-06,Marketing,Influencer campaign,47564,expense
+2026-06-08,Payroll,Employee salaries,42038,expense
+2026-06-11,Operations,Internet bill,75845,revenue
+2026-06-13,Payroll,Performance bonus,13178,expense
+2026-06-16,Marketing,Influencer campaign,38461,revenue
+2026-06-18,Sales,Online order,96326,revenue
+2026-06-20,Sales,Retail sale,16578,revenue
+2026-06-21,Sales,Enterprise contract,40394,revenue
+2026-06-24,Sales,Bulk product sale,84855,revenue
+2026-06-25,Sales,Bulk product sale,14758,revenue
+2026-06-27,Sales,Enterprise contract,82483,revenue
+2026-06-29,Sales,Enterprise contract,24386,revenue
+2026-07-02,Sales,Retail sale,76436,revenue
+2026-07-05,Marketing,Brand promotion,36427,revenue
+2026-07-06,Payroll,Performance bonus,29064,expense
+2026-07-09,Operations,Equipment maintenance,39084,expense
+2026-07-12,Operations,Utility payment,95343,revenue
+2026-07-15,Operations,Warehouse expense,20781,expense
+2026-07-16,Sales,Retail sale,98034,revenue
+2026-07-17,Marketing,Influencer campaign,23432,expense
+2026-07-19,Sales,Subscription renewal,46769,revenue
+2026-07-20,Marketing,SEO campaign,43391,expense
+2026-07-22,Marketing,SEO campaign,18953,revenue
+2026-07-23,Sales,Subscription renewal,38884,revenue
+2026-07-26,Payroll,Employee salaries,14801,expense
+2026-07-29,Marketing,Brand promotion,20975,revenue
+2026-08-01,Sales,Online order,88827,revenue
+2026-08-03,Operations,Equipment maintenance,4695,expense
+2026-08-05,Operations,Equipment maintenance,12607,expense
+2026-08-06,Payroll,Employee salaries,23407,revenue
+2026-08-08,Operations,Warehouse expense,19612,expense
+2026-08-10,Marketing,Social media ads,34303,expense
+2026-08-12,Marketing,Brand promotion,16387,expense
+2026-08-15,Operations,Internet bill,89677,revenue
+2026-08-16,Payroll,Staff reimbursement,3223,expense
+2026-08-17,Sales,Retail sale,47751,revenue
+2026-08-20,Marketing,Brand promotion,40578,expense
+2026-08-21,Sales,Retail sale,94407,revenue
+2026-08-24,Sales,Retail sale,91395,revenue
+2026-08-27,Payroll,Contractor payment,38787,expense
+2026-08-30,Sales,Retail sale,82887,revenue
+2026-08-31,Payroll,Contractor payment,71144,revenue
+2026-09-03,Operations,Equipment maintenance,45343,expense
+2026-09-04,Payroll,Staff reimbursement,69519,revenue
+2026-09-07,Payroll,Staff reimbursement,47851,expense
+2026-09-08,Payroll,Employee salaries,21050,expense
+2026-09-10,Sales,Enterprise contract,47092,revenue
+2026-09-11,Sales,Online order,97020,revenue
+2026-09-13,Payroll,Employee salaries,60000,revenue
+2026-09-14,Operations,Utility payment,5021,expense
+2026-09-16,Sales,Subscription renewal,13004,revenue
+2026-09-19,Payroll,Staff reimbursement,60049,revenue
+2026-09-22,Sales,Subscription renewal,75100,revenue
+2026-09-25,Sales,Enterprise contract,64585,revenue
+2026-09-28,Operations,Warehouse expense,17559,expense
+2026-09-30,Sales,Enterprise contract,71164,revenue
+2026-10-03,Marketing,SEO campaign,61567,revenue
+2026-10-05,Sales,Bulk product sale,17080,revenue
+2026-10-07,Sales,Subscription renewal,77495,revenue
+2026-10-08,Payroll,Performance bonus,36252,expense
+2026-10-11,Operations,Utility payment,18365,expense
+2026-10-14,Payroll,Staff reimbursement,14273,revenue
+2026-10-17,Marketing,Social media ads,78579,revenue
+2026-10-19,Operations,Utility payment,22195,expense
+2026-10-22,Marketing,Social media ads,60771,revenue
+2026-10-25,Marketing,SEO campaign,19318,expense
+2026-10-27,Marketing,Social media ads,71537,revenue
+2026-10-30,Sales,Online order,32425,revenue
+2026-11-01,Sales,Retail sale,62945,revenue
+2026-11-02,Sales,Bulk product sale,41777,revenue
+2026-11-03,Sales,Subscription renewal,83894,revenue
+2026-11-06,Operations,Internet bill,35668,revenue
+2026-11-07,Marketing,Brand promotion,2691,expense
+2026-11-10,Marketing,Email marketing,11605,expense
+2026-11-12,Marketing,Brand promotion,22596,revenue
+2026-11-14,Payroll,Employee salaries,26576,expense
+2026-11-17,Marketing,Brand promotion,96851,revenue
+2026-11-20,Payroll,Performance bonus,32488,expense
+2026-11-21,Payroll,Contractor payment,16439,expense
+2026-11-23,Payroll,Contractor payment,12206,revenue
+2026-11-24,Payroll,Performance bonus,25146,expense
+2026-11-25,Operations,Warehouse expense,34788,revenue
+2026-11-26,Marketing,Social media ads,41227,expense
+2026-11-29,Payroll,Staff reimbursement,85885,revenue
+2026-12-02,Payroll,Staff reimbursement,6917,expense
+2026-12-04,Sales,Retail sale,50620,revenue
+2026-12-06,Operations,Office supplies,2289,expense
+2026-12-09,Sales,Bulk product sale,48680,revenue
+2026-12-10,Marketing,SEO campaign,4570,expense
+2026-12-12,Sales,Subscription renewal,96437,revenue
+2026-12-14,Sales,Online order,19768,revenue
+2026-12-17,Operations,Warehouse expense,46840,expense
+2026-12-20,Operations,Equipment maintenance,43308,expense
+2026-12-21,Marketing,Social media ads,21657,revenue
+2026-12-23,Operations,Office supplies,67873,revenue
+2026-12-25,Sales,Online order,59000,revenue
+2026-12-26,Sales,Retail sale,11408,revenue
+2026-12-28,Marketing,Social media ads,61906,revenue
+2026-12-29,Payroll,Performance bonus,35386,revenue
+2027-01-01,Sales,Subscription renewal,71976,revenue
+2027-01-02,Operations,Warehouse expense,57851,revenue
+2027-01-05,Operations,Internet bill,28670,revenue
+2027-01-08,Payroll,Contractor payment,24092,revenue
+2027-01-11,Payroll,Performance bonus,29483,revenue
+2027-01-12,Marketing,Email marketing,6575,expense
+2027-01-14,Operations,Warehouse expense,92482,revenue
+2027-01-15,Marketing,SEO campaign,29497,revenue
+2027-01-17,Operations,Office supplies,8443,expense
+2027-01-18,Marketing,Social media ads,28883,expense
+2027-01-21,Marketing,SEO campaign,95313,revenue
+2027-01-24,Operations,Warehouse expense,1196,expense
+2027-01-27,Marketing,SEO campaign,32452,revenue
+2027-01-30,Operations,Office supplies,40067,expense
+2027-02-02,Marketing,Brand promotion,96619,revenue
+2027-02-04,Payroll,Employee salaries,23773,expense
+2027-02-05,Payroll,Employee salaries,20395,expense
+2027-02-08,Operations,Warehouse expense,29875,revenue
+2027-02-11,Operations,Internet bill,14599,revenue
+2027-02-14,Sales,Retail sale,73816,revenue
+2027-02-17,Marketing,Social media ads,14612,expense
+2027-02-19,Marketing,Email marketing,33785,expense
+2027-02-20,Operations,Internet bill,21375,revenue
+2027-02-21,Marketing,SEO campaign,6825,expense
+2027-02-23,Sales,Online order,21748,revenue
+2027-02-25,Payroll,Contractor payment,36480,expense
+2027-02-28,Marketing,SEO campaign,18177,revenue
+2027-03-01,Sales,Enterprise contract,55742,revenue
+2027-03-03,Sales,Retail sale,86566,revenue
+2027-03-04,Sales,Enterprise contract,37556,revenue
+2027-03-07,Payroll,Employee salaries,59651,revenue
+2027-03-10,Operations,Warehouse expense,82927,revenue
+2027-03-12,Marketing,Brand promotion,37305,expense
+2027-03-15,Sales,Enterprise contract,27015,revenue
+2027-03-17,Marketing,Brand promotion,78376,revenue
+2027-03-18,Operations,Warehouse expense,33540,revenue
+2027-03-19,Marketing,Influencer campaign,38702,expense
+2027-03-21,Operations,Utility payment,13561,expense
+2027-03-23,Marketing,Email marketing,37089,expense
+2027-03-24,Payroll,Performance bonus,35263,expense
+2027-03-25,Payroll,Contractor payment,11214,revenue
+2027-03-26,Marketing,Influencer campaign,36456,expense
+2027-03-27,Payroll,Contractor payment,40323,revenue
+2027-03-30,Sales,Online order,84495,revenue
+2027-04-02,Payroll,Performance bonus,11153,expense
+2027-04-04,Operations,Equipment maintenance,18711,expense
+2027-04-07,Payroll,Employee salaries,28086,expense
+2027-04-10,Marketing,Influencer campaign,28780,expense
+2027-04-12,Operations,Warehouse expense,42458,expense
+2027-04-13,Payroll,Contractor payment,71381,revenue
+2027-04-15,Sales,Bulk product sale,93374,revenue
+2027-04-17,Operations,Office supplies,25336,expense
+2027-04-18,Sales,Online order,78879,revenue
+2027-04-21,Operations,Warehouse expense,14042,revenue
+2027-04-22,Payroll,Employee salaries,12062,expense
+2027-04-25,Marketing,Influencer campaign,15682,expense
+2027-04-26,Sales,Bulk product sale,16646,revenue
+2027-04-27,Sales,Retail sale,10495,revenue
+2027-04-30,Sales,Retail sale,39056,revenue
+2027-05-03,Payroll,Performance bonus,79619,revenue
+2027-05-06,Marketing,Brand promotion,60134,revenue
+2027-05-09,Sales,Retail sale,65355,revenue
+2027-05-12,Payroll,Employee salaries,22369,expense
+2027-05-14,Marketing,Email marketing,19373,expense
+2027-05-16,Operations,Office supplies,82495,revenue
+2027-05-18,Marketing,Social media ads,28424,revenue
+2027-05-19,Payroll,Performance bonus,35675,expense
+2027-05-21,Operations,Internet bill,52591,revenue
+2027-05-22,Payroll,Staff reimbursement,19862,expense
+2027-05-24,Operations,Equipment maintenance,71257,revenue
+2027-05-27,Operations,Utility payment,57194,revenue
+2027-05-29,Payroll,Employee salaries,43904,revenue
+2027-05-30,Sales,Online order,80791,revenue
+2027-06-01,Payroll,Employee salaries,29824,revenue
+2027-06-03,Sales,Subscription renewal,25600,revenue
+2027-06-05,Sales,Online order,32313,revenue
+2027-06-07,Operations,Office supplies,97408,revenue
+2027-06-08,Marketing,Email marketing,20084,expense
+2027-06-11,Payroll,Staff reimbursement,70586,revenue
+2027-06-14,Payroll,Performance bonus,7683,expense
+2027-06-17,Sales,Retail sale,85183,revenue
+2027-06-19,Marketing,SEO campaign,81230,revenue
+2027-06-20,Payroll,Staff reimbursement,30556,expense
+2027-06-23,Operations,Internet bill,29847,expense
+2027-06-25,Payroll,Staff reimbursement,42617,expense
+2027-06-27,Sales,Bulk product sale,14702,revenue
+2027-06-28,Payroll,Performance bonus,63143,revenue
+2027-07-01,Sales,Online order,12202,revenue
+2027-07-02,Sales,Bulk product sale,17492,revenue
+2027-07-05,Payroll,Employee salaries,33393,revenue
+2027-07-07,Sales,Enterprise contract,20627,revenue
+2027-07-08,Sales,Online order,53056,revenue
+2027-07-10,Operations,Warehouse expense,52820,revenue
+2027-07-12,Marketing,SEO campaign,49213,expense
+2027-07-15,Sales,Enterprise contract,98153,revenue
+2027-07-18,Marketing,Brand promotion,29320,expense
+2027-07-21,Operations,Internet bill,8339,expense
+2027-07-22,Marketing,Brand promotion,33480,revenue
+2027-07-23,Operations,Warehouse expense,5918,expense
+2027-07-24,Operations,Utility payment,74846,revenue
+2027-07-26,Sales,Online order,94031,revenue
+2027-07-27,Payroll,Contractor payment,58276,revenue
+2027-07-29,Operations,Office supplies,16713,expense
+2027-08-01,Operations,Internet bill,89563,revenue
+2027-08-03,Payroll,Staff reimbursement,28794,expense
+2027-08-06,Payroll,Contractor payment,89868,revenue
+2027-08-07,Sales,Retail sale,59343,revenue
+2027-08-08,Payroll,Employee salaries,47279,revenue
+2027-08-10,Operations,Office supplies,88362,revenue
+2027-08-13,Payroll,Staff reimbursement,44948,expense
+2027-08-14,Marketing,SEO campaign,95255,revenue
+2027-08-16,Marketing,Social media ads,52465,revenue
+2027-08-19,Operations,Equipment maintenance,67669,revenue
+2027-08-20,Marketing,Email marketing,42618,expense
+2027-08-21,Marketing,Social media ads,20328,expense
+2027-08-22,Sales,Enterprise contract,55814,revenue
+2027-08-23,Marketing,Social media ads,2834,expense
+2027-08-25,Marketing,Email marketing,34700,expense
+2027-08-26,Payroll,Contractor payment,8910,expense
+2027-08-29,Payroll,Contractor payment,17700,revenue
+2027-08-30,Operations,Warehouse expense,54202,revenue
+2027-09-01,Sales,Subscription renewal,30032,revenue
+2027-09-03,Marketing,Email marketing,90877,revenue
+2027-09-05,Sales,Bulk product sale,44595,revenue
+2027-09-06,Payroll,Employee salaries,47417,revenue
+2027-09-07,Sales,Online order,60918,revenue
+2027-09-10,Marketing,Email marketing,2511,expense
+2027-09-12,Operations,Equipment maintenance,52401,revenue
+2027-09-15,Marketing,Social media ads,62549,revenue
+2027-09-18,Marketing,Influencer campaign,69009,revenue
+2027-09-21,Sales,Bulk product sale,70648,revenue
+2027-09-24,Payroll,Staff reimbursement,64559,revenue
+2027-09-27,Sales,Subscription renewal,69307,revenue
+2027-09-28,Marketing,Brand promotion,22495,expense
+2027-09-29,Sales,Subscription renewal,26810,revenue
+2027-10-02,Sales,Retail sale,49942,revenue
+2027-10-05,Operations,Office supplies,6011,expense
+2027-10-07,Marketing,SEO campaign,24727,expense
+2027-10-10,Payroll,Employee salaries,15193,revenue
+2027-10-11,Payroll,Performance bonus,76771,revenue
+2027-10-12,Operations,Utility payment,88050,revenue
+2027-10-13,Payroll,Contractor payment,30300,expense
+2027-10-16,Operations,Equipment maintenance,54270,revenue
+2027-10-19,Operations,Utility payment,85774,revenue
+2027-10-22,Marketing,Brand promotion,37821,expense
+2027-10-23,Sales,Subscription renewal,64530,revenue
+2027-10-26,Marketing,SEO campaign,26107,expense
+2027-10-27,Payroll,Staff reimbursement,47818,expense
+2027-10-30,Operations,Utility payment,98824,revenue
+2027-10-31,Marketing,Email marketing,76112,revenue
+2027-11-01,Marketing,Influencer campaign,21459,expense
+2027-11-03,Marketing,Influencer campaign,11563,revenue
+2027-11-05,Operations,Internet bill,40606,revenue
+2027-11-06,Payroll,Staff reimbursement,20248,expense
+2027-11-08,Sales,Retail sale,84851,revenue
+2027-11-11,Sales,Online order,64697,revenue
+2027-11-13,Sales,Retail sale,28726,revenue
+2027-11-15,Marketing,SEO campaign,22267,expense
+2027-11-18,Operations,Warehouse expense,46520,expense
+2027-11-21,Marketing,Brand promotion,58425,revenue
+2027-11-23,Payroll,Staff reimbursement,54523,revenue
+2027-11-25,Operations,Utility payment,69754,revenue
+2027-11-28,Payroll,Contractor payment,26241,revenue
+2027-11-30,Payroll,Contractor payment,86005,revenue
+2027-12-02,Operations,Internet bill,89153,revenue
+2027-12-04,Payroll,Contractor payment,19708,expense
+2027-12-07,Marketing,SEO campaign,26445,revenue
+2027-12-09,Operations,Warehouse expense,82585,revenue
+2027-12-11,Sales,Online order,93462,revenue
+2027-12-12,Operations,Equipment maintenance,63146,revenue
+2027-12-14,Sales,Retail sale,86127,revenue
+2027-12-17,Marketing,Social media ads,21066,expense
+2027-12-18,Marketing,SEO campaign,16473,expense
+2027-12-20,Payroll,Staff reimbursement,48935,revenue
+2027-12-21,Payroll,Contractor payment,46065,expense
+2027-12-22,Payroll,Contractor payment,4161,expense
+2027-12-23,Operations,Equipment maintenance,23018,expense
+2027-12-26,Sales,Bulk product sale,72684,revenue
+2027-12-28,Payroll,Performance bonus,32656,expense
+2027-12-29,Payroll,Staff reimbursement,86307,revenue
+2027-12-30,Sales,Enterprise contract,97939,revenue
+2027-12-31,Payroll,Staff reimbursement,63510,revenue
+2028-01-03,Operations,Office supplies,10164,revenue
+2028-01-05,Payroll,Employee salaries,14676,expense
+2028-01-07,Payroll,Contractor payment,24911,revenue
+2028-01-08,Marketing,Influencer campaign,38490,expense
+2028-01-11,Marketing,Social media ads,27755,expense
+2028-01-13,Marketing,Brand promotion,42781,expense
+2028-01-15,Marketing,Brand promotion,20198,revenue
+2028-01-18,Marketing,Email marketing,9699,expense
+2028-01-21,Marketing,Influencer campaign,12085,expense
+2028-01-23,Operations,Internet bill,6096,expense
+2028-01-24,Sales,Bulk product sale,65476,revenue
+2028-01-26,Payroll,Employee salaries,85991,revenue
+2028-01-27,Sales,Bulk product sale,89277,revenue
+2028-01-30,Marketing,SEO campaign,92410,revenue
+2028-02-01,Sales,Enterprise contract,91700,revenue
+2028-02-04,Marketing,SEO campaign,82700,revenue
+2028-02-05,Operations,Utility payment,37208,expense
+2028-02-07,Sales,Online order,22240,revenue
+2028-02-09,Sales,Retail sale,67156,revenue
+2028-02-12,Marketing,SEO campaign,18414,revenue
+2028-02-13,Payroll,Contractor payment,28618,expense
+2028-02-14,Operations,Internet bill,13823,revenue
+2028-02-16,Payroll,Staff reimbursement,41940,revenue

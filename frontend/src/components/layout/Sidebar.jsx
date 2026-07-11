@@ -15,7 +15,7 @@ import { APP_NAME } from '@/utils/constants';
 
 const navLinkClass = ({ isActive }) => (isActive ? 'nav-link active' : 'nav-link');
 
-const drawerContent = (
+const DrawerContent = ({ onNavigate }) => (
   <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
     <Toolbar sx={{ px: 2 }}>
       <Typography variant="h6" fontWeight={700} noWrap color="primary">
@@ -33,6 +33,7 @@ const drawerContent = (
             component={NavLink}
             to={item.path}
             className={navLinkClass}
+            onClick={onNavigate}
             sx={{
               borderRadius: 2,
               mb: 0.5,
@@ -72,7 +73,7 @@ const Sidebar = ({ drawerWidth, mobileOpen, onClose, isMobile }) => (
         },
       }}
     >
-      {drawerContent}
+      <DrawerContent onNavigate={isMobile ? onClose : undefined} />
     </Drawer>
   </Box>
 );

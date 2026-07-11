@@ -1,15 +1,14 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Chip, Box } from '@mui/material';
+import { Alert, Box, Button, Chip, CircularProgress } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import PageHeader from '@/components/common/PageHeader';
-import SearchBar from '@/components/common/SearchBar';
 import DataTable from '@/components/common/DataTable';
 import TablePagination from '@/components/common/Pagination';
-import { useDebounce } from '@/hooks/useDebounce';
-import { usePagination } from '@/hooks/usePagination';
-import { mockUsers } from '@/utils/mockDashboard';
+import TableToolbar from '@/components/common/TableToolbar';
+import { useTableControls } from '@/hooks/useTableControls';
 import { formatDate } from '@/utils/formatters';
+import userService from '@/services/userService';
 
 const columns = [
   { id: 'name', label: 'Name', render: (row) => `${row.firstName} ${row.lastName}` },
@@ -23,24 +22,50 @@ const columns = [
 
 const UserList = () => {
   const navigate = useNavigate();
-  const [search, setSearch] = useState('');
-  const debouncedSearch = useDebounce(search);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const filtered = useMemo(() => {
-    const q = debouncedSearch.toLowerCase();
-    if (!q) return mockUsers;
-    return mockUsers.filter(
-      (u) =>
-        u.email.toLowerCase().includes(q) ||
-        `${u.firstName} ${u.lastName}`.toLowerCase().includes(q),
-    );
-  }, [debouncedSearch]);
+  useEffect(() => {
+    const loadUsers = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const data = await userService.getAll();
+        setUsers(Array.isArray(data) ? data : data?.items || []);
+      } catch (err) {
+        setError(err.response?.data?.detail || 'Failed to load users.');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const { page, size, totalPages, setPage, setSize } = usePagination({
-    totalItems: filtered.length,
+    loadUsers();
+  }, []);
+
+  const filterConfigs = useMemo(() => [
+    { id: 'role', label: 'Role', format: (value) => value.replace('ROLE_', '') },
+    { id: 'status', label: 'Status' },
+  ], []);
+  const {
+    search,
+    setSearch,
+    filters,
+    setFilter,
+    resetFilters,
+    filterOptions,
+    filteredRows,
+    paginatedRows,
+    pagination,
+  } = useTableControls({
+    rows: users,
+    searchKeys: ['name', 'email', 'role', 'status'],
+    filterConfigs,
+    getValue: (row, key) => {
+      if (key === 'name') return `${row.firstName || ''} ${row.lastName || ''}`;
+      return row[key];
+    },
   });
-
-  const paginatedRows = filtered.slice(page * size, page * size + size);
 
   return (
     <>
@@ -53,22 +78,37 @@ const UserList = () => {
           </Button>
         }
       />
-      <Box sx={{ mb: 2, maxWidth: 400 }}>
-        <SearchBar value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search users…" />
-      </Box>
-      <DataTable
-        columns={columns}
-        rows={paginatedRows}
-        onRowClick={(row) => navigate(`/users/${row.id}`)}
+      <TableToolbar
+        search={search}
+        onSearchChange={setSearch}
+        searchPlaceholder="Search users..."
+        filters={filters}
+        filterOptions={filterOptions}
+        onFilterChange={setFilter}
+        onReset={resetFilters}
       />
-      <TablePagination
-        page={page}
-        size={size}
-        totalPages={totalPages}
-        totalItems={filtered.length}
-        onPageChange={setPage}
-        onSizeChange={setSize}
-      />
+      {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+      {loading ? (
+        <Box sx={{ display: 'grid', placeItems: 'center', minHeight: 260 }}>
+          <CircularProgress />
+        </Box>
+      ) : (
+        <>
+          <DataTable
+            columns={columns}
+            rows={paginatedRows}
+            onRowClick={(row) => navigate(`/users/${row.id}`)}
+          />
+          <TablePagination
+            page={pagination.page}
+            size={pagination.size}
+            totalPages={pagination.totalPages}
+            totalItems={filteredRows.length}
+            onPageChange={pagination.setPage}
+            onSizeChange={pagination.setSize}
+          />
+        </>
+      )}
     </>
   );
 };

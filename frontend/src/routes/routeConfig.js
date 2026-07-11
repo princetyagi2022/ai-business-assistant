@@ -16,11 +16,19 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 import DescriptionIcon from '@mui/icons-material/Description';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import SettingsIcon from '@mui/icons-material/Settings';
+import SearchIcon from '@mui/icons-material/Search';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 export const navItems = [
   { label: 'Dashboard', path: '/dashboard', icon: DashboardIcon },
   { label: 'AI Agents', path: '/ai-agents', icon: SmartToyIcon },
   { label: 'Chatbot', path: '/chatbot', icon: ChatIcon },
+  { divider: true },
+  { label: 'Lead Search', path: '/leads/search', icon: SearchIcon },
+  { label: 'Saved Leads', path: '/leads/saved', icon: BookmarkIcon },
+  { label: 'Campaigns', path: '/campaigns', icon: CampaignIcon },
+  { label: 'Analytics', path: '/analytics', icon: AnalyticsIcon },
+  { label: 'Settings', path: '/settings', icon: SettingsIcon },
   { divider: true },
   { label: 'Users', path: '/users', icon: PeopleIcon },
   { label: 'Employees', path: '/employees', icon: BadgeIcon },
@@ -31,12 +39,10 @@ export const navItems = [
   { label: 'Orders', path: '/orders', icon: ShoppingCartIcon },
   { label: 'Finance', path: '/finance', icon: AccountBalanceIcon },
   { label: 'Marketing', path: '/marketing', icon: CampaignIcon },
-  { label: 'Analytics', path: '/analytics', icon: AnalyticsIcon },
   { label: 'Reports', path: '/reports', icon: AssessmentIcon },
   { label: 'Documents', path: '/documents', icon: DescriptionIcon },
   { divider: true },
   { label: 'Notifications', path: '/notifications', icon: NotificationsIcon },
-  { label: 'Settings', path: '/settings', icon: SettingsIcon },
 ];
 
 export const publicRoutes = [

@@ -1,18 +1,44 @@
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Card, CardContent, Grid, Typography, Button, Chip } from '@mui/material';
+import { Alert, Box, Button, Card, CardContent, Chip, CircularProgress, Grid, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import PageHeader from '@/components/common/PageHeader';
-import { mockUsers } from '@/utils/mockDashboard';
 import { formatDate } from '@/utils/formatters';
+import userService from '@/services/userService';
 
 const UserDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const user = useMemo(() => mockUsers.find((u) => String(u.id) === id), [id]);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (!user) {
-    return <PageHeader title="User not found" />;
+  useEffect(() => {
+    const loadUser = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        setUser(await userService.getById(id));
+      } catch (err) {
+        setError(err.response?.data?.detail || 'Failed to load user.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadUser();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <Box sx={{ display: 'grid', placeItems: 'center', minHeight: 260 }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (error || !user) {
+    return <Alert severity="error">{error || 'User not found'}</Alert>;
   }
 
   return (

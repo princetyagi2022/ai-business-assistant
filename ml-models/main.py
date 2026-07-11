@@ -1,7 +1,8 @@
+import re
 from pathlib import Path
 
 import pandas as pd
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
@@ -26,9 +27,183 @@ class ChatRequest(BaseModel):
     sessionId: str | None = None
 
 
+class LoginRequest(BaseModel):
+    username: str | None = None
+    email: str | None = None
+    password: str | None = None
+
+
+class RegisterRequest(BaseModel):
+    firstName: str | None = None
+    lastName: str | None = None
+    email: str
+    password: str | None = None
+
+
 @app.get("/api/health")
 def health():
     return {"status": "ok"}
+
+
+def _records(df: pd.DataFrame) -> list[dict]:
+    if df.empty:
+        return []
+    return df.where(pd.notnull(df), None).to_dict(orient="records")
+
+
+def _rows_with_id(df: pd.DataFrame, id_column: str | None = None) -> list[dict]:
+    rows = _records(df)
+    for index, row in enumerate(rows, start=1):
+        row["id"] = row.get(id_column) if id_column and row.get(id_column) else index
+    return rows
+
+
+def _filter_rows(rows: list[dict], search: str | None = None) -> list[dict]:
+    if not search:
+        return rows
+    query = search.lower()
+    return [
+        row for row in rows
+        if query in " ".join(str(value).lower() for value in row.values() if value is not None)
+    ]
+
+
+def _list_response(rows: list[dict], search: str | None = None, limit: int | None = None) -> list[dict]:
+    filtered = _filter_rows(rows, search)
+    return filtered[:limit] if limit else filtered
+
+
+DISTANCE_RANGES_KM = {
+    "nearby": (0, 5),
+    "local": (5, 15),
+    "city": (15, 50),
+    "regional": (50, 150),
+    "far": (150, None),
+}
+
+
+def _distance_for_customer(index: int) -> float:
+    # Stable sample distance until real customer latitude/longitude is available.
+    sample_distances_km = [0.3, 0.5, 0.8, 1.0, 1.6, 2.0, 3.5, 5.0]
+    if index <= len(sample_distances_km):
+        return sample_distances_km[index - 1]
+    return round(((index * 0.75) % 180) + 0.2, 2)
+
+
+def _parse_distance_to_km(distance: str | None) -> float | None:
+    if not distance:
+        return None
+
+    value = distance.strip().lower().replace(",", "")
+    match = re.fullmatch(r"(\d+(?:\.\d+)?)\s*(m|meter|meters|km|kms|kilometer|kilometers|k)?", value)
+    if not match:
+        raise ValueError("distance must look like 500m, 500 meter, 1km, 2 km, or 5k")
+
+    amount = float(match.group(1))
+    unit = match.group(2) or "km"
+    if amount < 0:
+        raise ValueError("distance cannot be negative")
+    if unit in {"m", "meter", "meters"}:
+        return amount / 1000
+    return amount
+
+
+def _filter_by_distance(
+    rows: list[dict],
+    min_distance_km: float | None = None,
+    max_distance_km: float | None = None,
+    distance_range: str | None = None,
+) -> list[dict]:
+    if distance_range:
+        key = distance_range.lower()
+        if key not in DISTANCE_RANGES_KM:
+            allowed = ", ".join(DISTANCE_RANGES_KM.keys())
+            raise ValueError(f"Unknown distanceRange '{distance_range}'. Use one of: {allowed}")
+        range_min, range_max = DISTANCE_RANGES_KM[key]
+        min_distance_km = range_min if min_distance_km is None else min_distance_km
+        max_distance_km = range_max if max_distance_km is None else max_distance_km
+
+    return [
+        row for row in rows
+        if (
+            (min_distance_km is None or float(row.get("distanceKm", 0)) >= min_distance_km)
+            and (max_distance_km is None or float(row.get("distanceKm", 0)) <= max_distance_km)
+        )
+    ]
+
+
+def _customer_rows() -> list[dict]:
+    rows = _rows_with_id(_read_csv("customers.csv"), "email")
+    for index, row in enumerate(rows, start=1):
+        row["id"] = index
+        row["orders"] = row.get("order_count", 0)
+        row["status"] = "CHURN_RISK" if row.get("churned") else "ACTIVE"
+        row["distanceKm"] = _distance_for_customer(index)
+        row["distanceMeters"] = int(round(row["distanceKm"] * 1000))
+    return rows
+
+
+def _user_from_row(row: dict, index: int) -> dict:
+    parts = str(row.get("name", "")).split()
+    first_name = parts[0] if parts else "User"
+    last_name = " ".join(parts[1:]) if len(parts) > 1 else ""
+    role = f"ROLE_{str(row.get('role', 'user')).upper()}"
+    return {
+        "id": index,
+        "firstName": first_name,
+        "lastName": last_name,
+        "name": row.get("name"),
+        "email": row.get("email"),
+        "role": role,
+        "department": row.get("department"),
+        "status": str(row.get("status", "active")).upper(),
+        "createdAt": "2025-01-01",
+    }
+
+
+@app.post("/api/auth/login")
+def login(body: LoginRequest):
+    email = body.username or body.email or "admin@company.com"
+    users = _records(_read_csv("users.csv"))
+    matched = next((row for row in users if str(row.get("email", "")).lower() == email.lower()), users[0])
+    return {
+        "token": "dataset-dev-token",
+        "accessToken": "dataset-dev-token",
+        **_user_from_row(matched, 1),
+    }
+
+
+@app.post("/api/auth/register")
+def register(body: RegisterRequest):
+    name = f"{body.firstName or 'New'} {body.lastName or 'User'}".strip()
+    return {
+        "id": 999,
+        "firstName": body.firstName or "New",
+        "lastName": body.lastName or "User",
+        "name": name,
+        "email": body.email,
+        "role": "ROLE_USER",
+        "status": "ACTIVE",
+        "createdAt": "2025-01-01",
+    }
+
+
+@app.get("/api/auth/me")
+def me():
+    first = _records(_read_csv("users.csv"))[0]
+    return _user_from_row(first, 1)
+
+
+@app.post("/api/auth/refresh")
+def refresh():
+    return {"token": "dataset-dev-token", "accessToken": "dataset-dev-token"}
+
+
+@app.post("/api/auth/forgot-password")
+@app.post("/api/auth/reset-password")
+@app.post("/api/auth/verify-email")
+def auth_ack():
+    return {"success": True}
 
 
 @app.post("/api/chatbot/chat")
@@ -331,3 +506,253 @@ def dashboard():
         "recentActivities": recent_activities,
         "aiInsights": ai_insights,
     }
+
+
+@app.get("/api/users")
+def users(search: str | None = Query(default=None), limit: int | None = Query(default=None)):
+    rows = [_user_from_row(row, index) for index, row in enumerate(_records(_read_csv("users.csv")), start=1)]
+    return _list_response(rows, search, limit)
+
+
+@app.get("/api/users/{user_id}")
+def user_details(user_id: int):
+    rows = users()
+    return next((row for row in rows if row["id"] == user_id), rows[0])
+
+
+@app.post("/api/users")
+def create_user(body: dict):
+    return {"id": 999, "status": "ACTIVE", "createdAt": "2025-01-01", **body}
+
+
+@app.put("/api/users/{user_id}")
+def update_user(user_id: int, body: dict):
+    return {"id": user_id, **body}
+
+
+@app.delete("/api/users/{user_id}")
+def delete_user(user_id: int):
+    return {"success": True, "id": user_id}
+
+
+@app.get("/api/products")
+def products(search: str | None = Query(default=None), limit: int | None = Query(default=None)):
+    rows = _rows_with_id(_read_csv("products.csv"), "sku")
+    return _list_response(rows, search, limit)
+
+
+@app.get("/api/products/{sku}")
+def product_details(sku: str):
+    rows = products()
+    return next((row for row in rows if str(row["id"]) == sku or row.get("sku") == sku), rows[0])
+
+
+@app.post("/api/products")
+def create_product(body: dict):
+    return {"id": body.get("sku", 999), **body}
+
+
+@app.put("/api/products/{sku}")
+def update_product(sku: str, body: dict):
+    return {"id": sku, "sku": sku, **body}
+
+
+@app.delete("/api/products/{sku}")
+def delete_product(sku: str):
+    return {"success": True, "id": sku}
+
+
+@app.get("/api/customers/distance-ranges")
+def customer_distance_ranges():
+    return {
+        "unit": "km",
+        "distanceExamples": ["500m", "500 meter", "1km", "2 km", "5k"],
+        "ranges": [
+            {"key": key, "minDistanceKm": value[0], "maxDistanceKm": value[1]}
+            for key, value in DISTANCE_RANGES_KM.items()
+        ],
+    }
+
+
+@app.get("/api/customers")
+def customers(
+    search: str | None = None,
+    limit: int | None = None,
+    minDistanceKm: float | None = None,
+    maxDistanceKm: float | None = None,
+    distanceRange: str | None = None,
+    distance: str | None = None,
+):
+    try:
+        parsed_distance_km = _parse_distance_to_km(distance)
+        if parsed_distance_km is not None:
+            maxDistanceKm = parsed_distance_km if maxDistanceKm is None else min(maxDistanceKm, parsed_distance_km)
+        if minDistanceKm is not None and minDistanceKm < 0:
+            raise ValueError("minDistanceKm cannot be negative")
+        if maxDistanceKm is not None and maxDistanceKm < 0:
+            raise ValueError("maxDistanceKm cannot be negative")
+        if minDistanceKm is not None and maxDistanceKm is not None and minDistanceKm > maxDistanceKm:
+            raise ValueError("minDistanceKm cannot be greater than maxDistanceKm")
+
+        rows = _customer_rows()
+        rows = _filter_by_distance(rows, minDistanceKm, maxDistanceKm, distanceRange)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    return _list_response(rows, search, limit)
+
+
+@app.get("/api/customers/{customer_id}")
+def customer_details(customer_id: int):
+    rows = _customer_rows()
+    return next((row for row in rows if row["id"] == customer_id), rows[0])
+
+
+@app.post("/api/customers")
+def create_customer(body: dict):
+    return {"id": 999, "status": "ACTIVE", **body}
+
+
+@app.put("/api/customers/{customer_id}")
+def update_customer(customer_id: int, body: dict):
+    return {"id": customer_id, **body}
+
+
+@app.delete("/api/customers/{customer_id}")
+def delete_customer(customer_id: int):
+    return {"success": True, "id": customer_id}
+
+
+@app.get("/api/employees")
+def employees(search: str | None = Query(default=None), limit: int | None = Query(default=None)):
+    rows = _rows_with_id(_read_csv("employees.csv"), "employee_id")
+    return _list_response(rows, search, limit)
+
+
+@app.get("/api/inventory")
+def inventory(search: str | None = Query(default=None), limit: int | None = Query(default=None)):
+    rows = _rows_with_id(_read_csv("inventory.csv"), "sku")
+    for row in rows:
+        row["stock_status"] = "Reorder" if row["quantity"] <= row["reorder_level"] else "Healthy"
+        row["inventory_value"] = _money(row["quantity"] * row["unit_cost"])
+    return _list_response(rows, search, limit)
+
+
+@app.get("/api/sales")
+@app.get("/api/orders")
+def sales(search: str | None = Query(default=None), limit: int | None = Query(default=None)):
+    rows = _rows_with_id(_read_csv("sales.csv"), "order_id")
+    return _list_response(rows, search, limit)
+
+
+@app.post("/api/orders")
+def create_order(body: dict):
+    return {"id": body.get("order_id", 999), **body}
+
+
+@app.get("/api/finance/transactions")
+def finance_transactions(search: str | None = Query(default=None), limit: int | None = Query(default=None)):
+    rows = _rows_with_id(_read_csv("finance.csv"))
+    return _list_response(rows, search, limit)
+
+
+@app.get("/api/finance/summary")
+def finance_summary():
+    finance = _read_csv("finance.csv")
+    revenue = float(finance[finance["type"].str.lower() == "revenue"]["amount"].sum())
+    expenses = float(finance[finance["type"].str.lower() == "expense"]["amount"].sum())
+    return {"revenue": _money(revenue), "expenses": _money(expenses), "profit": _money(revenue - expenses)}
+
+
+@app.get("/api/finance/reports")
+def finance_reports():
+    return finance_transactions()
+
+
+@app.get("/api/marketing/campaigns")
+def marketing_campaigns(search: str | None = Query(default=None), limit: int | None = Query(default=None)):
+    rows = _rows_with_id(_read_csv("marketing.csv"), "campaign_name")
+    for row in rows:
+        budget = row.get("budget") or 1
+        row["roi"] = _money(((row.get("revenue", 0) - budget) / budget) * 100)
+    return _list_response(rows, search, limit)
+
+
+@app.post("/api/marketing/campaigns")
+def create_campaign(body: dict):
+    return {"id": body.get("campaign_name", 999), **body}
+
+
+@app.get("/api/analytics/overview")
+def analytics_overview():
+    data = _load_business_data()
+    summary = _business_summary(data)
+    return summary
+
+
+@app.get("/api/analytics/metrics")
+@app.get("/api/analytics/trends")
+def analytics_metrics():
+    return _rows_with_id(_read_csv("analytics_mixed.csv"))
+
+
+@app.get("/api/agents")
+def agents():
+    summary = _business_summary(_load_business_data())
+    return [
+        {"id": "sales-agent", "name": "Sales Insight Agent", "status": "active", "description": f"Tracks {summary['orders']} sales orders and revenue trends.", "tasksCompleted": summary["orders"]},
+        {"id": "inventory-agent", "name": "Inventory Reorder Agent", "status": "active", "description": f"Monitors {summary['low_stock_count']} low-stock SKUs.", "tasksCompleted": summary["low_stock_count"]},
+        {"id": "finance-agent", "name": "Finance Analysis Agent", "status": "active", "description": f"Reviews profit of {_currency(summary['profit'])}.", "tasksCompleted": 12},
+        {"id": "marketing-agent", "name": "Marketing ROI Agent", "status": "active", "description": f"Best campaign: {summary['top_campaign']}.", "tasksCompleted": 8},
+        {"id": "fraud-agent", "name": "Fraud Detection Agent", "status": "active", "description": f"Analyzes {summary['fraud_transactions']} transactions for anomalies.", "tasksCompleted": summary["fraud_transactions"]},
+    ]
+
+
+@app.get("/api/notifications")
+def notifications():
+    inventory_rows = inventory()
+    low_stock = [row for row in inventory_rows if row["stock_status"] == "Reorder"]
+    recent_order = sales(limit=1)[0]
+    return [
+        {"id": 1, "title": "Low inventory alert", "message": f"{len(low_stock)} SKUs need reorder review.", "read": False, "time": "Live dataset"},
+        {"id": 2, "title": "Latest order", "message": f"{recent_order['order_id']} closed for {_currency(recent_order['amount'])}.", "read": False, "time": recent_order["date"]},
+        {"id": 3, "title": "Dashboard data online", "message": "Python API is serving the frontend with CSV-backed business data.", "read": True, "time": "Now"},
+    ]
+
+
+@app.patch("/api/notifications/{notification_id}/read")
+def notification_read(notification_id: int):
+    return {"success": True, "id": notification_id}
+
+
+@app.patch("/api/notifications/read-all")
+def notifications_read_all():
+    return {"success": True}
+
+
+@app.delete("/api/notifications/{notification_id}")
+def notification_delete(notification_id: int):
+    return {"success": True, "id": notification_id}
+
+
+@app.get("/api/reports")
+def reports():
+    summary = _business_summary(_load_business_data())
+    return [
+        {"id": 1, "name": "Business Overview", "type": "dashboard", "status": "ready", "records": summary["orders"]},
+        {"id": 2, "name": "Inventory Reorder Report", "type": "inventory", "status": "ready", "records": summary["low_stock_count"]},
+        {"id": 3, "name": "Marketing ROI Report", "type": "marketing", "status": "ready", "records": 4},
+    ]
+
+
+@app.post("/api/reports/generate/{report_type}")
+def generate_report(report_type: str):
+    return {"id": report_type, "status": "ready"}
+
+
+@app.get("/api/documents")
+def documents():
+    return [
+        {"id": 1, "name": "Phase 1 Project Analysis", "type": "markdown", "status": "available", "path": "documents/phase-1-project-analysis-report.md"},
+        {"id": 2, "name": "Sales Dataset", "type": "csv", "status": "available", "path": "ml-models/data/sales.csv"},
+        {"id": 3, "name": "Inventory Dataset", "type": "csv", "status": "available", "path": "ml-models/data/inventory.csv"},
+    ]

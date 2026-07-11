@@ -1,5 +1,8 @@
 D:\Projects\ai-business-assistant\backend\src\main\java\com\ai\assistant\AiBusinessAssistantApplication.java
+D:\Projects\ai-business-assistant\backend\src\main\java\com\ai\assistant\config\DataInitializer.java
 D:\Projects\ai-business-assistant\backend\src\main\java\com\ai\assistant\config\SecurityConfig.java
+D:\Projects\ai-business-assistant\backend\src\main\java\com\ai\assistant\controller\AuthController.java
+D:\Projects\ai-business-assistant\backend\src\main\java\com\ai\assistant\controller\BusinessDataController.java
 D:\Projects\ai-business-assistant\backend\src\main\java\com\ai\assistant\dto\ApiResponse.java
 D:\Projects\ai-business-assistant\backend\src\main\java\com\ai\assistant\dto\CategoryDto.java
 D:\Projects\ai-business-assistant\backend\src\main\java\com\ai\assistant\dto\ChatRequest.java
@@ -64,3 +67,4 @@ D:\Projects\ai-business-assistant\backend\src\main\java\com\ai\assistant\securit
 D:\Projects\ai-business-assistant\backend\src\main\java\com\ai\assistant\security\CustomUserDetailsService.java
 D:\Projects\ai-business-assistant\backend\src\main\java\com\ai\assistant\security\JwtAuthenticationFilter.java
 D:\Projects\ai-business-assistant\backend\src\main\java\com\ai\assistant\security\JwtUtil.java
+D:\Projects\ai-business-assistant\backend\src\main\java\com\ai\assistant\service\AuthService.java

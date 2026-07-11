@@ -1,14 +1,14 @@
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Card, CardContent, Button, Box } from '@mui/material';
+import { Alert, Box, Button, Card, CardContent, CircularProgress } from '@mui/material';
 import PageHeader from '@/components/common/PageHeader';
 import FormTextField from '@/components/forms/FormTextField';
 import FormSelect from '@/components/forms/FormSelect';
 import { userFormSchema } from '@/utils/validators';
 import { ROLES } from '@/utils/constants';
-import { mockUsers } from '@/utils/mockDashboard';
+import userService from '@/services/userService';
 
 const roleOptions = Object.entries(ROLES).map(([key, value]) => ({
   value,
@@ -23,20 +23,55 @@ const statusOptions = [
 const EditUser = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const user = useMemo(() => mockUsers.find((u) => String(u.id) === id), [id]);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const { control, handleSubmit, formState: { isSubmitting } } = useForm({
+  const { control, handleSubmit, reset, formState: { isSubmitting } } = useForm({
     resolver: yupResolver(userFormSchema),
-    values: user
-      ? { firstName: user.firstName, lastName: user.lastName, email: user.email, role: user.role, status: user.status }
-      : undefined,
+    defaultValues: { firstName: '', lastName: '', email: '', role: ROLES.USER, status: 'ACTIVE' },
   });
 
-  if (!user) {
-    return <PageHeader title="User not found" />;
+  useEffect(() => {
+    const loadUser = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const data = await userService.getById(id);
+        setUser(data);
+        reset({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          role: data.role,
+          status: data.status,
+        });
+      } catch (err) {
+        setError(err.response?.data?.detail || 'Failed to load user.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadUser();
+  }, [id, reset]);
+
+  const onSubmit = async (values) => {
+    await userService.update(id, values);
+    navigate(`/users/${id}`);
+  };
+
+  if (loading) {
+    return (
+      <Box sx={{ display: 'grid', placeItems: 'center', minHeight: 260 }}>
+        <CircularProgress />
+      </Box>
+    );
   }
 
-  const onSubmit = () => navigate(`/users/${id}`);
+  if (error || !user) {
+    return <Alert severity="error">{error || 'User not found'}</Alert>;
+  }
 
   return (
     <>

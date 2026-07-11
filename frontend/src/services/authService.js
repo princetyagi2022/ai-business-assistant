@@ -10,6 +10,7 @@ const authService = {
 
   register: (data) =>
     api.post(API_ENDPOINTS.AUTH.REGISTER, {
+      username: data.username || data.email?.split('@')[0],
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,

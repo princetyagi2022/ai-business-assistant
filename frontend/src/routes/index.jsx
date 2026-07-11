@@ -26,7 +26,8 @@ import UserDetails from '@/pages/users/UserDetails';
 
 import ProductList from '@/pages/products/ProductList';
 import CustomerList from '@/pages/customers/CustomerList';
-import Placeholder from '@/pages/Placeholder';
+import DataModulePage from '@/pages/DataModulePage';
+import LeadSearchPage from '@/pages/leads/LeadSearchPage';
 
 import NotFound from '@/pages/errors/NotFound';
 import Forbidden from '@/pages/errors/Forbidden';
@@ -59,16 +60,29 @@ const AppRoutes = () => (
 
       <Route path="/products" element={<ProductList />} />
       <Route path="/customers" element={<CustomerList />} />
+      <Route path="/leads" element={<Navigate to="/leads/search" replace />} />
+      <Route path="/leads/search" element={<LeadSearchPage />} />
+      <Route
+        path="/leads/saved"
+        element={(
+          <CustomerList
+            title="Saved Leads"
+            subtitle="Saved lead records from the customer dataset"
+            searchPlaceholder="Search saved leads..."
+          />
+        )}
+      />
 
-      <Route path="/employees" element={<Placeholder title="Employees" description="Manage employee records and assignments." />} />
-      <Route path="/inventory" element={<Placeholder title="Inventory" description="Track stock levels and warehouse operations." />} />
-      <Route path="/sales" element={<Placeholder title="Sales" description="View sales pipeline and performance." />} />
-      <Route path="/orders" element={<Placeholder title="Orders" description="Manage customer orders and fulfillment." />} />
-      <Route path="/finance" element={<Placeholder title="Finance" description="Financial overview, transactions, and reports." />} />
-      <Route path="/marketing" element={<Placeholder title="Marketing" description="Campaign management and audience insights." />} />
+      <Route path="/employees" element={<DataModulePage title="Employees" subtitle="Real employee records from the backend dataset" endpoint="/employees" />} />
+      <Route path="/inventory" element={<DataModulePage title="Inventory" subtitle="Live stock levels, reorder points, and inventory value" endpoint="/inventory" />} />
+      <Route path="/sales" element={<DataModulePage title="Sales" subtitle="Sales orders and regional revenue from backend data" endpoint="/sales" />} />
+      <Route path="/orders" element={<DataModulePage title="Orders" subtitle="Customer orders and fulfillment records" endpoint="/orders" />} />
+      <Route path="/finance" element={<DataModulePage title="Finance" subtitle="Revenue and expense transactions" endpoint="/finance/transactions" />} />
+      <Route path="/marketing" element={<DataModulePage title="Marketing" subtitle="Campaign performance, conversions, and ROI" endpoint="/marketing/campaigns" />} />
+      <Route path="/campaigns" element={<DataModulePage title="Campaigns" subtitle="Campaign performance, conversions, and ROI" endpoint="/marketing/campaigns" />} />
       <Route path="/analytics" element={<AnalyticsPage />} />
-      <Route path="/reports" element={<Placeholder title="Reports" description="Generate and download business reports." />} />
-      <Route path="/documents" element={<Placeholder title="Documents" description="Upload and manage business documents." />} />
+      <Route path="/reports" element={<DataModulePage title="Reports" subtitle="Generated reports backed by current business datasets" endpoint="/reports" />} />
+      <Route path="/documents" element={<DataModulePage title="Documents" subtitle="Available project documents and source datasets" endpoint="/documents" />} />
     </Route>
 
     <Route element={<BlankLayout />}>

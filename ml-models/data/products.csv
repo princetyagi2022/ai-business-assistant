@@ -1,11 +1,511 @@
-﻿sku,name,category,price,stock,description,status
+sku,name,category,price,stock,description,status
 SKU-001,Wireless Mouse,Electronics,29.99,150,Ergonomic wireless mouse,active
 SKU-002,Mechanical Keyboard,Electronics,89.99,80,RGB mechanical keyboard,active
-SKU-003,USB-C Hub,Electronics,45.50,200,7-in-1 USB-C hub,active
-SKU-004,Office Chair,Furniture,249.00,35,Ergonomic office chair,active
-SKU-005,Standing Desk,Furniture,599.00,20,Electric standing desk,active
+SKU-003,USB-C Hub,Electronics,45.5,200,7-in-1 USB-C hub,active
+SKU-004,Office Chair,Furniture,249.0,35,Ergonomic office chair,active
+SKU-005,Standing Desk,Furniture,599.0,20,Electric standing desk,active
 SKU-006,Notebook Pack,Stationery,12.99,500,A5 notebooks pack of 5,active
-SKU-007,Whiteboard,Office,75.00,45,Magnetic whiteboard 4x3,active
-SKU-008,Projector,Electronics,450.00,12,HD business projector,active
-SKU-009,Webcam HD,Electronics,65.00,90,1080p webcam,active
+SKU-007,Whiteboard,Office,75.0,45,Magnetic whiteboard 4x3,active
+SKU-008,Projector,Electronics,450.0,12,HD business projector,active
+SKU-009,Webcam HD,Electronics,65.0,90,1080p webcam,active
 SKU-010,Desk Lamp,Furniture,34.99,110,LED desk lamp,active
+SKU-011,Wireless Switch,Electronics,49059.87,455,Wireless Switch,active
+SKU-012,Smart Power Bank,Furniture,9115.75,97,Smart Power Bank,active
+SKU-013,Smart Desk Lamp,Electronics,31226.53,421,Smart Desk Lamp,active
+SKU-014,Industrial Speaker,Stationery,11422.98,346,Industrial Speaker,active
+SKU-015,Portable Switch,Stationery,27773.58,189,Portable Switch,active
+SKU-016,Industrial Tripod,Furniture,24263.44,175,Industrial Tripod,active
+SKU-017,Digital Graphics Tablet,Office,8541.39,84,Digital Graphics Tablet,active
+SKU-018,Rechargeable Dock,Office,3019.21,187,Rechargeable Dock,active
+SKU-019,Smart HDMI Cable,Office,38298.92,118,Smart HDMI Cable,active
+SKU-020,Rechargeable Laptop Stand,Furniture,34023.13,177,Rechargeable Laptop Stand,active
+SKU-021,Mini Adapter,Electronics,25084.19,13,Mini Adapter,active
+SKU-022,Smart Power Bank,Office,48914.1,334,Smart Power Bank,active
+SKU-023,Portable Projector,Furniture,35931.8,265,Portable Projector,active
+SKU-024,Mini NAS,Office,47346.61,198,Mini NAS,active
+SKU-025,Mini Dock,Electronics,35108.48,8,Mini Dock,active
+SKU-026,Eco Graphics Tablet,Electronics,42431.79,256,Eco Graphics Tablet,active
+SKU-027,Portable Printer,Electronics,19157.06,50,Portable Printer,active
+SKU-028,Heavy Duty Cooling Pad,Office,16296.69,39,Heavy Duty Cooling Pad,active
+SKU-029,Industrial Headset,Furniture,36410.04,250,Industrial Headset,active
+SKU-030,Ultra Cooling Pad,Office,44684.73,123,Ultra Cooling Pad,active
+SKU-031,Rechargeable Projector,Electronics,32786.62,162,Rechargeable Projector,active
+SKU-032,Advanced Router,Stationery,6198.42,434,Advanced Router,active
+SKU-033,Digital NAS,Electronics,5947.85,438,Digital NAS,active
+SKU-034,Digital Monitor,Stationery,8859.17,370,Digital Monitor,active
+SKU-035,Digital Microphone,Stationery,14569.0,474,Digital Microphone,active
+SKU-036,Mini Microphone,Stationery,43194.9,412,Mini Microphone,active
+SKU-037,Digital Dock,Furniture,8411.38,249,Digital Dock,active
+SKU-038,Smart HDMI Cable,Electronics,14825.42,408,Smart HDMI Cable,active
+SKU-039,Rechargeable Adapter,Stationery,19175.96,482,Rechargeable Adapter,active
+SKU-040,Advanced Ethernet Cable,Furniture,49587.83,220,Advanced Ethernet Cable,active
+SKU-041,Pro Tripod,Electronics,43395.48,103,Pro Tripod,active
+SKU-042,Portable Monitor,Furniture,37693.67,35,Portable Monitor,active
+SKU-043,Rechargeable NAS,Furniture,8300.33,478,Rechargeable NAS,active
+SKU-044,Portable Microphone,Office,3234.37,362,Portable Microphone,active
+SKU-045,Smart Ethernet Cable,Stationery,32031.65,267,Smart Ethernet Cable,active
+SKU-046,Digital Webcam,Office,22781.72,94,Digital Webcam,active
+SKU-047,Heavy Duty Webcam,Office,27172.59,91,Heavy Duty Webcam,active
+SKU-048,Mini Tablet,Furniture,16510.02,415,Mini Tablet,active
+SKU-049,Compact Projector,Office,14474.61,11,Compact Projector,active
+SKU-050,Rechargeable Headset,Furniture,49594.46,212,Rechargeable Headset,active
+SKU-051,Premium Speaker,Furniture,36109.37,438,Premium Speaker,active
+SKU-052,Premium Printer,Office,18830.25,417,Premium Printer,active
+SKU-053,Ultra Scanner,Office,12048.43,196,Ultra Scanner,active
+SKU-054,Industrial Dock,Office,46050.35,248,Industrial Dock,active
+SKU-055,Premium Speaker,Furniture,17252.55,136,Premium Speaker,active
+SKU-056,Smart Desk Lamp,Stationery,48859.45,39,Smart Desk Lamp,active
+SKU-057,Mini SSD,Stationery,13209.49,140,Mini SSD,active
+SKU-058,Pro Dock,Office,44468.33,396,Pro Dock,active
+SKU-059,Portable Laptop Stand,Electronics,26484.27,423,Portable Laptop Stand,active
+SKU-060,Digital Mouse Pad,Electronics,2821.61,89,Digital Mouse Pad,active
+SKU-061,Digital Webcam,Furniture,47160.48,229,Digital Webcam,active
+SKU-062,Eco Microphone,Furniture,18430.38,183,Eco Microphone,active
+SKU-063,Industrial Dock,Electronics,10973.99,269,Industrial Dock,active
+SKU-064,Rechargeable Adapter,Office,11232.01,258,Rechargeable Adapter,active
+SKU-065,Ultra Cable,Electronics,45648.92,437,Ultra Cable,active
+SKU-066,Ultra Power Bank,Electronics,28158.48,163,Ultra Power Bank,active
+SKU-067,Classic NAS,Stationery,27111.83,339,Classic NAS,active
+SKU-068,Pro Laptop Stand,Furniture,38597.91,338,Pro Laptop Stand,active
+SKU-069,Classic NAS,Furniture,19314.74,179,Classic NAS,active
+SKU-070,Portable SSD,Stationery,25766.09,228,Portable SSD,active
+SKU-071,Advanced HDMI Cable,Electronics,23517.48,114,Advanced HDMI Cable,active
+SKU-072,Portable SSD,Stationery,11850.1,217,Portable SSD,active
+SKU-073,Premium HDMI Cable,Office,31978.63,493,Premium HDMI Cable,active
+SKU-074,Portable NAS,Stationery,45584.27,271,Portable NAS,active
+SKU-075,Eco SSD,Stationery,10516.86,87,Eco SSD,active
+SKU-076,Wireless Headset,Office,42001.4,216,Wireless Headset,active
+SKU-077,Heavy Duty Tablet,Stationery,38217.42,295,Heavy Duty Tablet,active
+SKU-078,Heavy Duty Dock,Electronics,37685.63,418,Heavy Duty Dock,active
+SKU-079,Eco Tripod,Furniture,24090.49,177,Eco Tripod,active
+SKU-080,Wireless Desk Lamp,Office,43815.2,420,Wireless Desk Lamp,active
+SKU-081,Mini HDMI Cable,Furniture,12465.7,84,Mini HDMI Cable,active
+SKU-082,Wireless Headset,Stationery,540.41,441,Wireless Headset,active
+SKU-083,Premium Laptop Stand,Electronics,31022.06,116,Premium Laptop Stand,active
+SKU-084,Rechargeable Tablet,Office,15121.12,247,Rechargeable Tablet,active
+SKU-085,Classic Webcam,Office,32046.39,233,Classic Webcam,active
+SKU-086,Smart Graphics Tablet,Office,2798.79,159,Smart Graphics Tablet,active
+SKU-087,Industrial Dock,Stationery,25855.97,265,Industrial Dock,active
+SKU-088,Rechargeable Graphics Tablet,Office,33339.25,178,Rechargeable Graphics Tablet,active
+SKU-089,Ultra Microphone,Electronics,41480.9,492,Ultra Microphone,active
+SKU-090,Eco Router,Electronics,13081.37,278,Eco Router,active
+SKU-091,Mini Mouse Pad,Furniture,40492.21,86,Mini Mouse Pad,active
+SKU-092,Rechargeable Scanner,Furniture,13964.77,43,Rechargeable Scanner,active
+SKU-093,Wireless Cooling Pad,Stationery,49808.66,232,Wireless Cooling Pad,active
+SKU-094,Portable Router,Electronics,27232.64,210,Portable Router,active
+SKU-095,Heavy Duty Switch,Office,48206.41,332,Heavy Duty Switch,active
+SKU-096,Classic Cable,Electronics,34600.6,332,Classic Cable,active
+SKU-097,Eco Router,Electronics,19900.18,35,Eco Router,active
+SKU-098,Pro Scanner,Office,19177.28,416,Pro Scanner,active
+SKU-099,Compact Power Bank,Office,35815.06,18,Compact Power Bank,active
+SKU-100,Eco Power Bank,Furniture,445.45,125,Eco Power Bank,active
+SKU-101,Classic Printer,Stationery,37843.49,284,Classic Printer,active
+SKU-102,Mini Switch,Stationery,29913.53,158,Mini Switch,active
+SKU-103,Pro Monitor,Furniture,43287.1,378,Pro Monitor,active
+SKU-104,Smart Printer,Stationery,17790.62,262,Smart Printer,active
+SKU-105,Classic Cooling Pad,Electronics,46055.6,498,Classic Cooling Pad,active
+SKU-106,Rechargeable Tripod,Stationery,11266.35,388,Rechargeable Tripod,active
+SKU-107,Classic Cable,Office,39989.21,464,Classic Cable,active
+SKU-108,Classic Router,Furniture,18390.12,137,Classic Router,active
+SKU-109,Portable Webcam,Furniture,11495.19,104,Portable Webcam,active
+SKU-110,Premium SSD,Furniture,40350.61,131,Premium SSD,active
+SKU-111,Premium Desk Lamp,Furniture,7403.34,453,Premium Desk Lamp,active
+SKU-112,Eco Printer,Office,47898.38,276,Eco Printer,active
+SKU-113,Pro Projector,Office,41752.24,433,Pro Projector,active
+SKU-114,Classic Adapter,Stationery,2207.85,84,Classic Adapter,active
+SKU-115,Digital Dock,Office,41901.65,388,Digital Dock,active
+SKU-116,Rechargeable NAS,Office,25413.99,187,Rechargeable NAS,active
+SKU-117,Wireless Cable,Office,1021.96,112,Wireless Cable,active
+SKU-118,Eco Cable,Furniture,1224.16,239,Eco Cable,active
+SKU-119,Heavy Duty NAS,Furniture,38284.63,321,Heavy Duty NAS,active
+SKU-120,Eco Tripod,Electronics,23024.7,271,Eco Tripod,active
+SKU-121,Classic Desk Lamp,Stationery,4357.03,173,Classic Desk Lamp,active
+SKU-122,Premium SSD,Stationery,39761.21,52,Premium SSD,active
+SKU-123,Pro Scanner,Electronics,26179.6,478,Pro Scanner,active
+SKU-124,Portable Monitor,Electronics,20369.44,385,Portable Monitor,active
+SKU-125,Mini Power Bank,Electronics,17557.58,47,Mini Power Bank,active
+SKU-126,Portable Headset,Stationery,19508.56,33,Portable Headset,active
+SKU-127,Heavy Duty SSD,Stationery,19180.21,253,Heavy Duty SSD,active
+SKU-128,Advanced Ethernet Cable,Electronics,1002.64,269,Advanced Ethernet Cable,active
+SKU-129,Advanced Microphone,Furniture,4065.64,472,Advanced Microphone,active
+SKU-130,Industrial Headset,Office,22642.74,422,Industrial Headset,active
+SKU-131,Classic HDMI Cable,Electronics,40210.18,350,Classic HDMI Cable,active
+SKU-132,Premium Monitor,Electronics,24827.0,53,Premium Monitor,active
+SKU-133,Ultra Desk Lamp,Office,37034.8,15,Ultra Desk Lamp,active
+SKU-134,Compact Webcam,Electronics,48420.56,222,Compact Webcam,active
+SKU-135,Classic Graphics Tablet,Furniture,40808.21,431,Classic Graphics Tablet,active
+SKU-136,Rechargeable Laptop Stand,Furniture,32167.16,127,Rechargeable Laptop Stand,active
+SKU-137,Advanced Router,Furniture,44042.63,405,Advanced Router,active
+SKU-138,Classic Power Bank,Office,43693.99,219,Classic Power Bank,active
+SKU-139,Wireless Switch,Office,31470.52,14,Wireless Switch,active
+SKU-140,Wireless Monitor,Office,19394.52,402,Wireless Monitor,active
+SKU-141,Pro Mouse Pad,Office,20165.93,115,Pro Mouse Pad,active
+SKU-142,Wireless Monitor,Furniture,2265.52,226,Wireless Monitor,active
+SKU-143,Advanced Microphone,Stationery,15346.99,325,Advanced Microphone,active
+SKU-144,Eco NAS,Furniture,21085.99,394,Eco NAS,active
+SKU-145,Digital SSD,Office,7171.59,317,Digital SSD,active
+SKU-146,Classic Mouse Pad,Stationery,13256.2,445,Classic Mouse Pad,active
+SKU-147,Advanced Webcam,Furniture,49166.1,7,Advanced Webcam,active
+SKU-148,Mini Adapter,Office,4236.62,1,Mini Adapter,active
+SKU-149,Rechargeable Cooling Pad,Furniture,10501.22,204,Rechargeable Cooling Pad,active
+SKU-150,Portable Headset,Stationery,2196.67,139,Portable Headset,active
+SKU-151,Mini Power Bank,Stationery,2454.18,395,Mini Power Bank,active
+SKU-152,Smart Projector,Office,42374.12,173,Smart Projector,active
+SKU-153,Digital Headset,Stationery,5887.72,329,Digital Headset,active
+SKU-154,Advanced Microphone,Stationery,37918.22,404,Advanced Microphone,active
+SKU-155,Compact Printer,Furniture,37889.74,198,Compact Printer,active
+SKU-156,Digital Scanner,Furniture,48904.04,276,Digital Scanner,active
+SKU-157,Smart Microphone,Stationery,31411.54,223,Smart Microphone,active
+SKU-158,Heavy Duty Tablet,Furniture,34811.76,48,Heavy Duty Tablet,active
+SKU-159,Eco Ethernet Cable,Stationery,25637.91,16,Eco Ethernet Cable,active
+SKU-160,Pro Graphics Tablet,Stationery,27647.81,100,Pro Graphics Tablet,active
+SKU-161,Advanced Webcam,Office,29215.1,125,Advanced Webcam,active
+SKU-162,Premium Microphone,Electronics,11818.83,354,Premium Microphone,active
+SKU-163,Premium SSD,Stationery,25592.8,316,Premium SSD,active
+SKU-164,Classic Printer,Furniture,36783.49,95,Classic Printer,active
+SKU-165,Smart Laptop Stand,Stationery,2699.42,222,Smart Laptop Stand,active
+SKU-166,Classic Adapter,Office,49314.97,387,Classic Adapter,active
+SKU-167,Eco Adapter,Electronics,35571.97,399,Eco Adapter,active
+SKU-168,Premium Webcam,Office,38020.72,486,Premium Webcam,active
+SKU-169,Wireless Cooling Pad,Electronics,11882.51,362,Wireless Cooling Pad,active
+SKU-170,Digital Headset,Furniture,15575.52,286,Digital Headset,active
+SKU-171,Wireless Scanner,Furniture,18249.76,470,Wireless Scanner,active
+SKU-172,Advanced Webcam,Stationery,7231.21,51,Advanced Webcam,active
+SKU-173,Digital Cooling Pad,Office,28775.52,400,Digital Cooling Pad,active
+SKU-174,Advanced Cable,Stationery,13854.24,364,Advanced Cable,active
+SKU-175,Pro NAS,Stationery,35680.62,198,Pro NAS,active
+SKU-176,Heavy Duty Scanner,Electronics,32377.51,334,Heavy Duty Scanner,active
+SKU-177,Eco Graphics Tablet,Furniture,46645.47,134,Eco Graphics Tablet,active
+SKU-178,Digital Router,Furniture,20919.42,269,Digital Router,active
+SKU-179,Compact Laptop Stand,Electronics,33825.97,151,Compact Laptop Stand,active
+SKU-180,Classic Tripod,Stationery,42565.34,110,Classic Tripod,active
+SKU-181,Premium Router,Electronics,36878.69,39,Premium Router,active
+SKU-182,Smart Projector,Stationery,12376.75,279,Smart Projector,active
+SKU-183,Wireless Power Bank,Office,36152.72,4,Wireless Power Bank,active
+SKU-184,Classic Tablet,Electronics,18600.69,413,Classic Tablet,active
+SKU-185,Digital Webcam,Stationery,11196.73,169,Digital Webcam,active
+SKU-186,Wireless Tripod,Electronics,48388.42,295,Wireless Tripod,active
+SKU-187,Pro Switch,Electronics,14211.21,40,Pro Switch,active
+SKU-188,Industrial Printer,Electronics,26391.78,366,Industrial Printer,active
+SKU-189,Eco Headset,Stationery,28543.14,345,Eco Headset,active
+SKU-190,Industrial Microphone,Office,515.92,41,Industrial Microphone,active
+SKU-191,Advanced Cable,Electronics,38608.0,394,Advanced Cable,active
+SKU-192,Classic Microphone,Electronics,11521.25,406,Classic Microphone,active
+SKU-193,Ultra Tripod,Electronics,7237.88,213,Ultra Tripod,active
+SKU-194,Pro Graphics Tablet,Electronics,41241.11,45,Pro Graphics Tablet,active
+SKU-195,Ultra Dock,Stationery,1394.59,192,Ultra Dock,active
+SKU-196,Classic Tablet,Electronics,35820.76,304,Classic Tablet,active
+SKU-197,Portable Cable,Stationery,18405.43,378,Portable Cable,active
+SKU-198,Heavy Duty Adapter,Office,8762.65,308,Heavy Duty Adapter,active
+SKU-199,Premium Graphics Tablet,Electronics,19254.91,215,Premium Graphics Tablet,active
+SKU-200,Mini Power Bank,Office,27693.51,207,Mini Power Bank,active
+SKU-201,Industrial Graphics Tablet,Electronics,33486.41,422,Industrial Graphics Tablet,active
+SKU-202,Digital Scanner,Electronics,21702.1,190,Digital Scanner,active
+SKU-203,Portable Mouse Pad,Electronics,16348.48,212,Portable Mouse Pad,active
+SKU-204,Digital Scanner,Furniture,8729.82,370,Digital Scanner,active
+SKU-205,Pro Graphics Tablet,Furniture,18130.14,123,Pro Graphics Tablet,active
+SKU-206,Industrial Tripod,Electronics,21130.43,2,Industrial Tripod,active
+SKU-207,Mini Headset,Furniture,13448.24,121,Mini Headset,active
+SKU-208,Industrial Desk Lamp,Furniture,12412.11,345,Industrial Desk Lamp,active
+SKU-209,Compact Power Bank,Stationery,48503.44,114,Compact Power Bank,active
+SKU-210,Eco Cooling Pad,Electronics,12320.63,17,Eco Cooling Pad,active
+SKU-211,Premium Ethernet Cable,Stationery,25634.89,406,Premium Ethernet Cable,active
+SKU-212,Heavy Duty SSD,Electronics,3723.84,465,Heavy Duty SSD,active
+SKU-213,Eco Monitor,Electronics,32851.33,322,Eco Monitor,active
+SKU-214,Industrial Ethernet Cable,Stationery,27523.33,483,Industrial Ethernet Cable,active
+SKU-215,Compact HDMI Cable,Office,42173.15,237,Compact HDMI Cable,active
+SKU-216,Pro Microphone,Office,6390.65,300,Pro Microphone,active
+SKU-217,Ultra Scanner,Office,28200.36,125,Ultra Scanner,active
+SKU-218,Rechargeable SSD,Office,36921.74,291,Rechargeable SSD,active
+SKU-219,Wireless Tripod,Stationery,32074.79,175,Wireless Tripod,active
+SKU-220,Smart Webcam,Electronics,35418.57,153,Smart Webcam,active
+SKU-221,Classic Microphone,Office,38247.74,180,Classic Microphone,active
+SKU-222,Heavy Duty Adapter,Stationery,4497.47,234,Heavy Duty Adapter,active
+SKU-223,Classic Mouse Pad,Electronics,44470.48,356,Classic Mouse Pad,active
+SKU-224,Heavy Duty Desk Lamp,Office,41566.33,360,Heavy Duty Desk Lamp,active
+SKU-225,Mini Microphone,Electronics,14839.03,441,Mini Microphone,active
+SKU-226,Smart Microphone,Office,8718.67,483,Smart Microphone,active
+SKU-227,Pro Graphics Tablet,Electronics,24166.92,236,Pro Graphics Tablet,active
+SKU-228,Ultra Power Bank,Office,32975.71,78,Ultra Power Bank,active
+SKU-229,Premium Router,Office,43099.67,360,Premium Router,active
+SKU-230,Portable Microphone,Furniture,836.64,100,Portable Microphone,active
+SKU-231,Advanced Tripod,Office,24645.95,125,Advanced Tripod,active
+SKU-232,Wireless Power Bank,Furniture,44204.53,216,Wireless Power Bank,active
+SKU-233,Classic Adapter,Electronics,27878.54,498,Classic Adapter,active
+SKU-234,Rechargeable Tripod,Furniture,10830.33,175,Rechargeable Tripod,active
+SKU-235,Advanced Power Bank,Electronics,35238.37,434,Advanced Power Bank,active
+SKU-236,Portable Desk Lamp,Electronics,38944.43,381,Portable Desk Lamp,active
+SKU-237,Portable Microphone,Electronics,36650.96,282,Portable Microphone,active
+SKU-238,Mini Cooling Pad,Electronics,12359.93,242,Mini Cooling Pad,active
+SKU-239,Classic NAS,Furniture,7919.56,214,Classic NAS,active
+SKU-240,Pro NAS,Office,8152.21,176,Pro NAS,active
+SKU-241,Compact HDMI Cable,Electronics,2086.34,84,Compact HDMI Cable,active
+SKU-242,Mini NAS,Electronics,28264.85,349,Mini NAS,active
+SKU-243,Compact Tripod,Stationery,7349.52,15,Compact Tripod,active
+SKU-244,Eco Cooling Pad,Stationery,24347.15,302,Eco Cooling Pad,active
+SKU-245,Advanced Tripod,Electronics,36128.85,248,Advanced Tripod,active
+SKU-246,Rechargeable Scanner,Furniture,11662.96,251,Rechargeable Scanner,active
+SKU-247,Mini Monitor,Office,37851.17,220,Mini Monitor,active
+SKU-248,Mini HDMI Cable,Office,27806.08,196,Mini HDMI Cable,active
+SKU-249,Industrial Webcam,Office,47744.09,412,Industrial Webcam,active
+SKU-250,Ultra Webcam,Office,32180.68,271,Ultra Webcam,active
+SKU-251,Compact Ethernet Cable,Stationery,49329.38,478,Compact Ethernet Cable,active
+SKU-252,Advanced Switch,Office,24083.49,173,Advanced Switch,active
+SKU-253,Rechargeable Speaker,Stationery,41081.57,395,Rechargeable Speaker,active
+SKU-254,Heavy Duty Headset,Furniture,33366.27,37,Heavy Duty Headset,active
+SKU-255,Premium Desk Lamp,Electronics,34771.23,284,Premium Desk Lamp,active
+SKU-256,Smart HDMI Cable,Office,35283.18,218,Smart HDMI Cable,active
+SKU-257,Ultra Tripod,Office,5815.58,329,Ultra Tripod,active
+SKU-258,Ultra Graphics Tablet,Stationery,39910.7,114,Ultra Graphics Tablet,active
+SKU-259,Eco Dock,Furniture,38542.61,363,Eco Dock,active
+SKU-260,Digital Speaker,Stationery,39766.63,100,Digital Speaker,active
+SKU-261,Eco Dock,Office,32295.65,449,Eco Dock,active
+SKU-262,Smart Mouse Pad,Electronics,2094.02,92,Smart Mouse Pad,active
+SKU-263,Advanced Laptop Stand,Electronics,6217.99,107,Advanced Laptop Stand,active
+SKU-264,Pro Projector,Electronics,12519.35,388,Pro Projector,active
+SKU-265,Portable Switch,Furniture,11948.82,419,Portable Switch,active
+SKU-266,Classic Printer,Electronics,29935.27,469,Classic Printer,active
+SKU-267,Rechargeable Mouse Pad,Stationery,47995.62,380,Rechargeable Mouse Pad,active
+SKU-268,Portable Power Bank,Electronics,24145.16,381,Portable Power Bank,active
+SKU-269,Classic Tablet,Furniture,38925.51,51,Classic Tablet,active
+SKU-270,Eco Monitor,Electronics,43636.45,179,Eco Monitor,active
+SKU-271,Heavy Duty SSD,Electronics,2357.35,242,Heavy Duty SSD,active
+SKU-272,Smart Laptop Stand,Office,32387.82,493,Smart Laptop Stand,active
+SKU-273,Advanced Mouse Pad,Stationery,17839.05,94,Advanced Mouse Pad,active
+SKU-274,Ultra Cable,Furniture,37789.15,374,Ultra Cable,active
+SKU-275,Industrial Headset,Stationery,3788.8,118,Industrial Headset,active
+SKU-276,Industrial HDMI Cable,Furniture,46311.99,79,Industrial HDMI Cable,active
+SKU-277,Heavy Duty Adapter,Electronics,812.42,382,Heavy Duty Adapter,active
+SKU-278,Premium Headset,Office,21404.68,351,Premium Headset,active
+SKU-279,Premium Scanner,Office,15220.84,357,Premium Scanner,active
+SKU-280,Premium Tripod,Furniture,29303.92,157,Premium Tripod,active
+SKU-281,Premium Scanner,Stationery,11053.94,389,Premium Scanner,active
+SKU-282,Digital Laptop Stand,Office,43831.89,187,Digital Laptop Stand,active
+SKU-283,Ultra Webcam,Stationery,9006.26,220,Ultra Webcam,active
+SKU-284,Compact Scanner,Stationery,24831.26,167,Compact Scanner,active
+SKU-285,Premium Ethernet Cable,Office,33397.33,119,Premium Ethernet Cable,active
+SKU-286,Wireless Dock,Furniture,41000.61,200,Wireless Dock,active
+SKU-287,Pro Graphics Tablet,Furniture,23278.54,130,Pro Graphics Tablet,active
+SKU-288,Wireless NAS,Stationery,15748.27,376,Wireless NAS,active
+SKU-289,Mini Adapter,Electronics,44602.37,160,Mini Adapter,active
+SKU-290,Compact Scanner,Electronics,13688.57,223,Compact Scanner,active
+SKU-291,Classic Ethernet Cable,Furniture,18944.5,457,Classic Ethernet Cable,active
+SKU-292,Wireless Graphics Tablet,Office,18865.67,217,Wireless Graphics Tablet,active
+SKU-293,Portable Cooling Pad,Office,1940.9,426,Portable Cooling Pad,active
+SKU-294,Compact Webcam,Electronics,28017.36,258,Compact Webcam,active
+SKU-295,Mini Scanner,Stationery,32500.05,241,Mini Scanner,active
+SKU-296,Compact Power Bank,Furniture,2457.49,455,Compact Power Bank,active
+SKU-297,Rechargeable Dock,Stationery,33224.39,189,Rechargeable Dock,active
+SKU-298,Digital Router,Furniture,1241.96,375,Digital Router,active
+SKU-299,Advanced Monitor,Stationery,49261.09,162,Advanced Monitor,active
+SKU-300,Premium Monitor,Furniture,44728.58,233,Premium Monitor,active
+SKU-301,Wireless Ethernet Cable,Electronics,22443.35,453,Wireless Ethernet Cable,active
+SKU-302,Portable Power Bank,Furniture,3027.67,451,Portable Power Bank,active
+SKU-303,Advanced Laptop Stand,Electronics,39711.84,236,Advanced Laptop Stand,active
+SKU-304,Compact Monitor,Stationery,40789.34,89,Compact Monitor,active
+SKU-305,Portable Power Bank,Stationery,3014.0,255,Portable Power Bank,active
+SKU-306,Portable Speaker,Electronics,19921.29,238,Portable Speaker,active
+SKU-307,Smart Desk Lamp,Stationery,42068.75,143,Smart Desk Lamp,active
+SKU-308,Premium Headset,Furniture,18803.69,93,Premium Headset,active
+SKU-309,Portable Adapter,Office,7369.47,94,Portable Adapter,active
+SKU-310,Premium Monitor,Stationery,43117.62,468,Premium Monitor,active
+SKU-311,Pro Speaker,Stationery,49966.97,401,Pro Speaker,active
+SKU-312,Pro Tablet,Furniture,32029.35,426,Pro Tablet,active
+SKU-313,Pro Projector,Furniture,14561.56,161,Pro Projector,active
+SKU-314,Portable Tripod,Electronics,31217.48,287,Portable Tripod,active
+SKU-315,Smart Microphone,Stationery,43753.08,54,Smart Microphone,active
+SKU-316,Eco Printer,Office,1654.85,489,Eco Printer,active
+SKU-317,Advanced Scanner,Stationery,6446.14,103,Advanced Scanner,active
+SKU-318,Ultra Tripod,Stationery,39331.54,169,Ultra Tripod,active
+SKU-319,Mini Dock,Furniture,18012.92,111,Mini Dock,active
+SKU-320,Compact Router,Electronics,24496.12,44,Compact Router,active
+SKU-321,Eco Speaker,Stationery,39872.87,10,Eco Speaker,active
+SKU-322,Rechargeable Desk Lamp,Office,4266.72,414,Rechargeable Desk Lamp,active
+SKU-323,Portable Printer,Stationery,10213.94,379,Portable Printer,active
+SKU-324,Heavy Duty Switch,Electronics,15573.67,481,Heavy Duty Switch,active
+SKU-325,Pro Dock,Furniture,48437.32,280,Pro Dock,active
+SKU-326,Smart Scanner,Stationery,14364.55,158,Smart Scanner,active
+SKU-327,Portable Router,Furniture,20606.08,283,Portable Router,active
+SKU-328,Industrial Cable,Office,7339.81,90,Industrial Cable,active
+SKU-329,Wireless Tripod,Furniture,48325.35,171,Wireless Tripod,active
+SKU-330,Advanced Switch,Stationery,32262.51,405,Advanced Switch,active
+SKU-331,Mini Monitor,Office,941.0,479,Mini Monitor,active
+SKU-332,Mini Projector,Electronics,48755.68,412,Mini Projector,active
+SKU-333,Compact Projector,Furniture,13914.3,28,Compact Projector,active
+SKU-334,Mini Scanner,Office,16156.08,55,Mini Scanner,active
+SKU-335,Eco Headset,Stationery,3105.02,270,Eco Headset,active
+SKU-336,Heavy Duty Cable,Electronics,25086.82,149,Heavy Duty Cable,active
+SKU-337,Industrial Projector,Electronics,48534.39,263,Industrial Projector,active
+SKU-338,Premium Tablet,Electronics,43709.41,264,Premium Tablet,active
+SKU-339,Premium Dock,Furniture,17423.54,289,Premium Dock,active
+SKU-340,Digital Cable,Stationery,28657.71,316,Digital Cable,active
+SKU-341,Pro Speaker,Electronics,15240.33,238,Pro Speaker,active
+SKU-342,Smart Cable,Stationery,35671.63,177,Smart Cable,active
+SKU-343,Portable Cooling Pad,Electronics,40599.43,1,Portable Cooling Pad,active
+SKU-344,Advanced Laptop Stand,Office,20803.73,181,Advanced Laptop Stand,active
+SKU-345,Classic Adapter,Electronics,4137.18,268,Classic Adapter,active
+SKU-346,Eco Desk Lamp,Furniture,36529.19,9,Eco Desk Lamp,active
+SKU-347,Industrial Switch,Furniture,8135.99,321,Industrial Switch,active
+SKU-348,Portable Power Bank,Electronics,39288.07,424,Portable Power Bank,active
+SKU-349,Wireless Webcam,Stationery,31527.59,405,Wireless Webcam,active
+SKU-350,Mini Tripod,Stationery,15894.2,449,Mini Tripod,active
+SKU-351,Pro Desk Lamp,Electronics,15791.93,330,Pro Desk Lamp,active
+SKU-352,Industrial Router,Stationery,34640.0,91,Industrial Router,active
+SKU-353,Premium Router,Office,40849.37,156,Premium Router,active
+SKU-354,Ultra Dock,Office,1868.3,485,Ultra Dock,active
+SKU-355,Premium Scanner,Electronics,22506.55,379,Premium Scanner,active
+SKU-356,Heavy Duty Cable,Furniture,45208.04,174,Heavy Duty Cable,active
+SKU-357,Smart Speaker,Office,35306.72,375,Smart Speaker,active
+SKU-358,Heavy Duty Scanner,Office,4783.55,492,Heavy Duty Scanner,active
+SKU-359,Digital Printer,Electronics,36272.57,37,Digital Printer,active
+SKU-360,Heavy Duty Microphone,Office,24236.77,374,Heavy Duty Microphone,active
+SKU-361,Rechargeable Speaker,Electronics,45405.58,383,Rechargeable Speaker,active
+SKU-362,Heavy Duty Router,Electronics,44137.26,59,Heavy Duty Router,active
+SKU-363,Smart Monitor,Furniture,40345.32,100,Smart Monitor,active
+SKU-364,Pro Router,Electronics,25666.35,301,Pro Router,active
+SKU-365,Wireless Monitor,Furniture,33296.83,161,Wireless Monitor,active
+SKU-366,Wireless Scanner,Electronics,36885.69,208,Wireless Scanner,active
+SKU-367,Classic Tripod,Electronics,9748.26,389,Classic Tripod,active
+SKU-368,Wireless NAS,Furniture,22879.33,173,Wireless NAS,active
+SKU-369,Wireless Speaker,Office,29578.92,68,Wireless Speaker,active
+SKU-370,Advanced Desk Lamp,Stationery,2874.15,166,Advanced Desk Lamp,active
+SKU-371,Premium Speaker,Electronics,2314.48,320,Premium Speaker,active
+SKU-372,Industrial Power Bank,Furniture,44053.23,349,Industrial Power Bank,active
+SKU-373,Pro Microphone,Office,26520.35,365,Pro Microphone,active
+SKU-374,Compact NAS,Stationery,1555.6,280,Compact NAS,active
+SKU-375,Advanced Projector,Furniture,12042.31,52,Advanced Projector,active
+SKU-376,Portable Monitor,Office,38010.71,61,Portable Monitor,active
+SKU-377,Advanced Projector,Electronics,9021.58,392,Advanced Projector,active
+SKU-378,Wireless Microphone,Stationery,26282.47,304,Wireless Microphone,active
+SKU-379,Industrial Desk Lamp,Stationery,32564.4,329,Industrial Desk Lamp,active
+SKU-380,Mini Graphics Tablet,Furniture,37922.62,311,Mini Graphics Tablet,active
+SKU-381,Mini Adapter,Electronics,18809.94,382,Mini Adapter,active
+SKU-382,Eco SSD,Stationery,46017.51,86,Eco SSD,active
+SKU-383,Industrial Cooling Pad,Electronics,36786.12,474,Industrial Cooling Pad,active
+SKU-384,Rechargeable Adapter,Office,32446.89,183,Rechargeable Adapter,active
+SKU-385,Portable Microphone,Stationery,22209.1,456,Portable Microphone,active
+SKU-386,Rechargeable Tripod,Stationery,19041.68,12,Rechargeable Tripod,active
+SKU-387,Smart NAS,Furniture,12949.06,12,Smart NAS,active
+SKU-388,Mini HDMI Cable,Stationery,39995.16,217,Mini HDMI Cable,active
+SKU-389,Advanced Projector,Stationery,28253.32,446,Advanced Projector,active
+SKU-390,Ultra Headset,Furniture,34308.16,282,Ultra Headset,active
+SKU-391,Industrial Dock,Electronics,37499.79,218,Industrial Dock,active
+SKU-392,Heavy Duty Adapter,Office,48270.77,167,Heavy Duty Adapter,active
+SKU-393,Compact Desk Lamp,Electronics,6536.94,453,Compact Desk Lamp,active
+SKU-394,Heavy Duty Power Bank,Stationery,40016.59,491,Heavy Duty Power Bank,active
+SKU-395,Ultra Switch,Office,15947.47,485,Ultra Switch,active
+SKU-396,Pro Graphics Tablet,Office,45281.3,434,Pro Graphics Tablet,active
+SKU-397,Advanced Mouse Pad,Stationery,13418.31,259,Advanced Mouse Pad,active
+SKU-398,Industrial Webcam,Furniture,14533.11,385,Industrial Webcam,active
+SKU-399,Ultra Power Bank,Stationery,49499.19,178,Ultra Power Bank,active
+SKU-400,Compact Speaker,Office,41904.27,103,Compact Speaker,active
+SKU-401,Heavy Duty Dock,Furniture,38776.98,474,Heavy Duty Dock,active
+SKU-402,Wireless Tablet,Furniture,5523.45,62,Wireless Tablet,active
+SKU-403,Classic Ethernet Cable,Stationery,45546.45,164,Classic Ethernet Cable,active
+SKU-404,Heavy Duty Speaker,Electronics,25580.86,232,Heavy Duty Speaker,active
+SKU-405,Smart SSD,Furniture,45277.07,194,Smart SSD,active
+SKU-406,Eco Speaker,Electronics,30019.88,451,Eco Speaker,active
+SKU-407,Mini Graphics Tablet,Stationery,17625.71,395,Mini Graphics Tablet,active
+SKU-408,Eco Mouse Pad,Office,39632.77,329,Eco Mouse Pad,active
+SKU-409,Mini Tripod,Stationery,49065.15,221,Mini Tripod,active
+SKU-410,Compact Speaker,Furniture,2522.63,479,Compact Speaker,active
+SKU-411,Heavy Duty Switch,Furniture,46380.08,306,Heavy Duty Switch,active
+SKU-412,Advanced Tablet,Office,15094.23,86,Advanced Tablet,active
+SKU-413,Compact Ethernet Cable,Electronics,25192.23,415,Compact Ethernet Cable,active
+SKU-414,Heavy Duty Dock,Office,30348.49,396,Heavy Duty Dock,active
+SKU-415,Portable SSD,Furniture,498.01,484,Portable SSD,active
+SKU-416,Premium Speaker,Stationery,33365.7,264,Premium Speaker,active
+SKU-417,Heavy Duty Cooling Pad,Stationery,30047.79,382,Heavy Duty Cooling Pad,active
+SKU-418,Eco SSD,Office,24382.84,341,Eco SSD,active
+SKU-419,Classic Dock,Office,36840.17,13,Classic Dock,active
+SKU-420,Digital Projector,Furniture,22018.36,471,Digital Projector,active
+SKU-421,Advanced Scanner,Furniture,43956.15,16,Advanced Scanner,active
+SKU-422,Classic Tripod,Stationery,49251.72,184,Classic Tripod,active
+SKU-423,Advanced SSD,Furniture,2091.17,211,Advanced SSD,active
+SKU-424,Classic Monitor,Electronics,6820.87,102,Classic Monitor,active
+SKU-425,Digital Dock,Office,41413.5,133,Digital Dock,active
+SKU-426,Heavy Duty Adapter,Furniture,27882.14,37,Heavy Duty Adapter,active
+SKU-427,Wireless SSD,Office,39665.19,297,Wireless SSD,active
+SKU-428,Pro Printer,Office,1975.99,420,Pro Printer,active
+SKU-429,Ultra Mouse Pad,Furniture,15976.88,424,Ultra Mouse Pad,active
+SKU-430,Heavy Duty Desk Lamp,Furniture,49494.18,127,Heavy Duty Desk Lamp,active
+SKU-431,Industrial Tablet,Electronics,38916.81,252,Industrial Tablet,active
+SKU-432,Smart Tripod,Office,4283.16,12,Smart Tripod,active
+SKU-433,Compact Desk Lamp,Electronics,14687.45,52,Compact Desk Lamp,active
+SKU-434,Wireless Monitor,Stationery,20960.11,46,Wireless Monitor,active
+SKU-435,Rechargeable Graphics Tablet,Electronics,43151.49,337,Rechargeable Graphics Tablet,active
+SKU-436,Rechargeable Scanner,Office,48617.01,352,Rechargeable Scanner,active
+SKU-437,Eco Headset,Office,23692.3,153,Eco Headset,active
+SKU-438,Heavy Duty Cooling Pad,Electronics,9928.58,359,Heavy Duty Cooling Pad,active
+SKU-439,Compact Tablet,Office,13580.92,104,Compact Tablet,active
+SKU-440,Wireless Monitor,Furniture,28253.14,26,Wireless Monitor,active
+SKU-441,Advanced Tablet,Stationery,11659.1,488,Advanced Tablet,active
+SKU-442,Mini Cable,Furniture,34416.99,494,Mini Cable,active
+SKU-443,Portable Ethernet Cable,Electronics,12398.83,163,Portable Ethernet Cable,active
+SKU-444,Wireless Dock,Electronics,7921.51,248,Wireless Dock,active
+SKU-445,Portable SSD,Electronics,32568.0,12,Portable SSD,active
+SKU-446,Premium Cooling Pad,Furniture,27753.16,458,Premium Cooling Pad,active
+SKU-447,Smart Headset,Stationery,25628.77,75,Smart Headset,active
+SKU-448,Wireless Tablet,Furniture,20571.56,205,Wireless Tablet,active
+SKU-449,Portable Projector,Furniture,4215.47,449,Portable Projector,active
+SKU-450,Premium Headset,Office,32902.13,439,Premium Headset,active
+SKU-451,Smart Adapter,Office,8421.56,176,Smart Adapter,active
+SKU-452,Premium NAS,Furniture,34286.64,395,Premium NAS,active
+SKU-453,Industrial Scanner,Electronics,47991.29,249,Industrial Scanner,active
+SKU-454,Industrial Desk Lamp,Furniture,49414.0,341,Industrial Desk Lamp,active
+SKU-455,Wireless Speaker,Furniture,14923.54,347,Wireless Speaker,active
+SKU-456,Pro Scanner,Electronics,16157.04,41,Pro Scanner,active
+SKU-457,Ultra Mouse Pad,Electronics,17614.14,478,Ultra Mouse Pad,active
+SKU-458,Wireless NAS,Stationery,26082.03,320,Wireless NAS,active
+SKU-459,Premium Projector,Electronics,23198.75,320,Premium Projector,active
+SKU-460,Digital Webcam,Furniture,5415.2,295,Digital Webcam,active
+SKU-461,Pro Cooling Pad,Office,7798.09,490,Pro Cooling Pad,active
+SKU-462,Mini Tablet,Electronics,40762.44,448,Mini Tablet,active
+SKU-463,Premium Projector,Furniture,32114.5,191,Premium Projector,active
+SKU-464,Advanced Adapter,Stationery,36419.31,426,Advanced Adapter,active
+SKU-465,Digital Tripod,Electronics,14142.52,363,Digital Tripod,active
+SKU-466,Wireless Cooling Pad,Electronics,11437.77,183,Wireless Cooling Pad,active
+SKU-467,Eco Adapter,Office,10989.62,366,Eco Adapter,active
+SKU-468,Compact SSD,Stationery,30614.14,65,Compact SSD,active
+SKU-469,Portable Adapter,Furniture,18651.03,15,Portable Adapter,active
+SKU-470,Digital HDMI Cable,Electronics,20055.09,306,Digital HDMI Cable,active
+SKU-471,Digital Dock,Stationery,19034.14,48,Digital Dock,active
+SKU-472,Rechargeable Microphone,Stationery,3587.55,249,Rechargeable Microphone,active
+SKU-473,Advanced Dock,Electronics,11288.7,418,Advanced Dock,active
+SKU-474,Ultra Tripod,Electronics,28611.26,267,Ultra Tripod,active
+SKU-475,Portable Ethernet Cable,Stationery,10696.01,246,Portable Ethernet Cable,active
+SKU-476,Digital Cooling Pad,Furniture,39935.86,426,Digital Cooling Pad,active
+SKU-477,Ultra Speaker,Office,18297.65,297,Ultra Speaker,active
+SKU-478,Eco Switch,Furniture,8913.41,11,Eco Switch,active
+SKU-479,Industrial Speaker,Furniture,19163.27,201,Industrial Speaker,active
+SKU-480,Mini Ethernet Cable,Furniture,19747.34,443,Mini Ethernet Cable,active
+SKU-481,Mini Scanner,Stationery,24944.68,191,Mini Scanner,active
+SKU-482,Advanced Mouse Pad,Office,45032.94,172,Advanced Mouse Pad,active
+SKU-483,Wireless Power Bank,Furniture,49053.63,145,Wireless Power Bank,active
+SKU-484,Classic Tripod,Office,37358.39,379,Classic Tripod,active
+SKU-485,Heavy Duty Speaker,Furniture,9771.65,370,Heavy Duty Speaker,active
+SKU-486,Mini Headset,Furniture,49292.03,334,Mini Headset,active
+SKU-487,Digital Cable,Furniture,19921.92,187,Digital Cable,active
+SKU-488,Rechargeable Projector,Electronics,23694.3,71,Rechargeable Projector,active
+SKU-489,Portable Dock,Furniture,48671.6,66,Portable Dock,active
+SKU-490,Ultra Tablet,Office,5808.32,450,Ultra Tablet,active
+SKU-491,Wireless Tripod,Electronics,39903.59,409,Wireless Tripod,active
+SKU-492,Compact Dock,Office,16058.65,470,Compact Dock,active
+SKU-493,Industrial Projector,Office,26148.72,29,Industrial Projector,active
+SKU-494,Wireless Tripod,Furniture,49310.8,204,Wireless Tripod,active
+SKU-495,Advanced Scanner,Furniture,487.1,144,Advanced Scanner,active
+SKU-496,Pro Printer,Office,20094.98,307,Pro Printer,active
+SKU-497,Rechargeable Graphics Tablet,Electronics,48059.86,335,Rechargeable Graphics Tablet,active
+SKU-498,Advanced Mouse Pad,Electronics,20296.79,451,Advanced Mouse Pad,active
+SKU-499,Ultra Adapter,Electronics,8574.79,254,Ultra Adapter,active
+SKU-500,Advanced Adapter,Stationery,424.14,338,Advanced Adapter,active
+SKU-501,Mini Router,Furniture,6580.02,409,Mini Router,active
+SKU-502,Rechargeable Adapter,Furniture,33602.06,354,Rechargeable Adapter,active
+SKU-503,Digital Cooling Pad,Stationery,15915.5,342,Digital Cooling Pad,active
+SKU-504,Eco Monitor,Electronics,1192.99,119,Eco Monitor,active
+SKU-505,Mini Router,Electronics,26524.04,147,Mini Router,active
+SKU-506,Wireless Monitor,Furniture,6110.98,104,Wireless Monitor,active
+SKU-507,Digital Mouse Pad,Furniture,22092.23,267,Digital Mouse Pad,active
+SKU-508,Premium Monitor,Stationery,20017.02,52,Premium Monitor,active
+SKU-509,Wireless Tablet,Office,7037.78,375,Wireless Tablet,active
+SKU-510,Wireless Projector,Stationery,36870.32,353,Wireless Projector,active

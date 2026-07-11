@@ -25,14 +25,14 @@ const RegisterPage = () => {
     const result = await registerUser(data);
     if (result.success) {
       setSuccess(true);
-      setTimeout(() => navigate('/auth/verify-email', { state: { email: data.email } }), 1500);
+      setTimeout(() => navigate('/auth/login', { state: { message: 'Account created. Sign in with your password.' } }), 1500);
     } else setSubmitError(result.error);
   };
 
   return (
     <Box component="form" onSubmit={handleSubmit(onSubmit)}>
       <AuthFormHeader title="Create account" subtitle="Get started with AI Business Assistant" />
-      {success && <Alert severity="success" sx={{ mb: 2 }}>Account created! Verify your email.</Alert>}
+      {success && <Alert severity="success" sx={{ mb: 2 }}>Account created! You can sign in now.</Alert>}
       {submitError && <Alert severity="error" sx={{ mb: 2 }}>{submitError}</Alert>}
       <Grid container spacing={1}>
         <Grid item xs={12} sm={6}>

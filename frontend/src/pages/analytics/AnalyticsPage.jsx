@@ -37,7 +37,11 @@ import ChartCard from '@/components/common/ChartCard';
 import DataTable from '@/components/common/DataTable';
 import PageHeader from '@/components/common/PageHeader';
 import StatCard from '@/components/common/StatCard';
+import TablePagination from '@/components/common/Pagination';
+import TableToolbar from '@/components/common/TableToolbar';
+import { useTableControls } from '@/hooks/useTableControls';
 import mlAnalyticsService from '@/services/mlAnalyticsService';
+import { inferFilterConfigs } from '@/utils/tableFilters';
 
 const formatLabel = (value) => value
   .replace(/_/g, ' ')
@@ -190,10 +194,27 @@ const AnalyticsPage = () => {
     [dataset],
   );
 
-  const dataRows = normalizeRows(dataset?.data?.[tableTab] || []);
-  const analysisRows = normalizeRows(dataset?.analysis?.rows || []);
-  const dataColumns = buildColumns(dataset?.columns, dataRows);
-  const analysisColumns = buildColumns([], analysisRows);
+  const dataRows = useMemo(() => normalizeRows(dataset?.data?.[tableTab] || []), [dataset, tableTab]);
+  const analysisRows = useMemo(() => normalizeRows(dataset?.analysis?.rows || []), [dataset]);
+  const dataColumns = useMemo(() => buildColumns(dataset?.columns, dataRows), [dataRows, dataset?.columns]);
+  const analysisColumns = useMemo(() => buildColumns([], analysisRows), [analysisRows]);
+  const dataSearchKeys = useMemo(() => dataColumns.map((column) => column.id), [dataColumns]);
+  const analysisSearchKeys = useMemo(() => analysisColumns.map((column) => column.id), [analysisColumns]);
+  const dataFilterConfigs = useMemo(() => inferFilterConfigs(dataRows, dataSearchKeys), [dataRows, dataSearchKeys]);
+  const analysisFilterConfigs = useMemo(
+    () => inferFilterConfigs(analysisRows, analysisSearchKeys),
+    [analysisRows, analysisSearchKeys],
+  );
+  const dataTable = useTableControls({
+    rows: dataRows,
+    searchKeys: dataSearchKeys,
+    filterConfigs: dataFilterConfigs,
+  });
+  const analysisTable = useTableControls({
+    rows: analysisRows,
+    searchKeys: analysisSearchKeys,
+    filterConfigs: analysisFilterConfigs,
+  });
   const chartData = dataset?.analysis?.chart_data || dataset?.analysis?.rows || [];
 
   const handleModuleChange = (event) => {
@@ -302,10 +323,27 @@ const AnalyticsPage = () => {
             <Card sx={{ height: '100%' }}>
               <CardContent>
                 <Typography variant="h6" sx={{ mb: 2 }}>Operation Result Rows</Typography>
+                <TableToolbar
+                  search={analysisTable.search}
+                  onSearchChange={analysisTable.setSearch}
+                  searchPlaceholder="Search result rows..."
+                  filters={analysisTable.filters}
+                  filterOptions={analysisTable.filterOptions}
+                  onFilterChange={analysisTable.setFilter}
+                  onReset={analysisTable.resetFilters}
+                />
                 <DataTable
                   columns={analysisColumns}
-                  rows={analysisRows.slice(0, 8)}
+                  rows={analysisTable.paginatedRows}
                   emptyMessage="No operation rows returned"
+                />
+                <TablePagination
+                  page={analysisTable.pagination.page}
+                  size={analysisTable.pagination.size}
+                  totalPages={analysisTable.pagination.totalPages}
+                  totalItems={analysisTable.filteredRows.length}
+                  onPageChange={analysisTable.pagination.setPage}
+                  onSizeChange={analysisTable.pagination.setSize}
                 />
               </CardContent>
             </Card>
@@ -327,10 +365,27 @@ const AnalyticsPage = () => {
                     <Tab value="test" label={`Test (${dataset.split.test_count})`} />
                   </Tabs>
                 </Stack>
+                <TableToolbar
+                  search={dataTable.search}
+                  onSearchChange={dataTable.setSearch}
+                  searchPlaceholder="Search dataset rows..."
+                  filters={dataTable.filters}
+                  filterOptions={dataTable.filterOptions}
+                  onFilterChange={dataTable.setFilter}
+                  onReset={dataTable.resetFilters}
+                />
                 <DataTable
                   columns={dataColumns}
-                  rows={dataRows}
+                  rows={dataTable.paginatedRows}
                   emptyMessage="No dataset rows found"
+                />
+                <TablePagination
+                  page={dataTable.pagination.page}
+                  size={dataTable.pagination.size}
+                  totalPages={dataTable.pagination.totalPages}
+                  totalItems={dataTable.filteredRows.length}
+                  onPageChange={dataTable.pagination.setPage}
+                  onSizeChange={dataTable.pagination.setSize}
                 />
               </CardContent>
             </Card>
