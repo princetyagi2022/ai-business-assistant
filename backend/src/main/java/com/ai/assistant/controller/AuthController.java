@@ -1,16 +1,9 @@
 package com.ai.assistant.controller;
 
-import com.ai.assistant.dto.ApiResponse;
-import com.ai.assistant.dto.JwtResponse;
-import com.ai.assistant.dto.LoginRequest;
-import com.ai.assistant.dto.RegisterRequest;
-import com.ai.assistant.dto.UserDto;
-import com.ai.assistant.service.AuthService;
-import jakarta.validation.Valid;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +11,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.ai.assistant.dto.ApiResponse;
+import com.ai.assistant.dto.JwtResponse;
+import com.ai.assistant.dto.LoginRequest;
+import com.ai.assistant.dto.RegisterRequest;
+import com.ai.assistant.dto.UserDto;
+import com.ai.assistant.service.AuthService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/auth")
@@ -31,7 +33,13 @@ public class AuthController {
 
     @PostMapping("/login")
     public ApiResponse<JwtResponse> login(@Valid @RequestBody LoginRequest request) {
-        return ApiResponse.success("Login successful", authService.login(request));
+
+        System.out.println("===== LOGIN API HIT =====");
+        System.out.println(request.getUsername());
+
+        return ApiResponse.success(
+                "Login successful",
+                authService.login(request));
     }
 
     @PostMapping("/register")

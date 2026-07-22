@@ -3,7 +3,9 @@ package com.ai.assistant.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -43,15 +45,30 @@ public class Product {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Category category;
     
     @Column(name = "image_url", length = 500)
     private String imageUrl;
     
+    @Column(name = "mrp", precision = 10, scale = 2)
+    private BigDecimal mrp;
+    
+    @Column(name = "rating", precision = 3, scale = 2)
+    private BigDecimal rating;
+    
+    @Column(name = "review_count")
+    private Integer reviewCount;
+    
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<Inventory> inventory = new HashSet<>();
     
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<OrderItem> orderItems = new HashSet<>();
     
     @CreationTimestamp

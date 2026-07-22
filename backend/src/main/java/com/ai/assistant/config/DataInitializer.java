@@ -7,6 +7,7 @@ import com.ai.assistant.entity.Employee;
 import com.ai.assistant.entity.Inventory;
 import com.ai.assistant.entity.MarketingCampaign;
 import com.ai.assistant.entity.Order;
+import com.ai.assistant.entity.Payment;
 import com.ai.assistant.entity.Product;
 import com.ai.assistant.entity.Report;
 import com.ai.assistant.entity.Role;
@@ -20,6 +21,7 @@ import com.ai.assistant.repository.EmployeeRepository;
 import com.ai.assistant.repository.InventoryRepository;
 import com.ai.assistant.repository.MarketingCampaignRepository;
 import com.ai.assistant.repository.OrderRepository;
+import com.ai.assistant.repository.PaymentRepository;
 import com.ai.assistant.repository.ProductRepository;
 import com.ai.assistant.repository.ReportRepository;
 import com.ai.assistant.repository.RoleRepository;
@@ -27,12 +29,19 @@ import com.ai.assistant.repository.SaleRepository;
 import com.ai.assistant.repository.SupplierRepository;
 import com.ai.assistant.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -51,6 +60,7 @@ public class DataInitializer implements CommandLineRunner {
     private final ReportRepository reportRepository;
     private final DocumentRepository documentRepository;
     private final EmployeeRepository employeeRepository;
+    private final PaymentRepository paymentRepository;
     private final PasswordEncoder passwordEncoder;
 
     public DataInitializer(
@@ -67,6 +77,7 @@ public class DataInitializer implements CommandLineRunner {
             ReportRepository reportRepository,
             DocumentRepository documentRepository,
             EmployeeRepository employeeRepository,
+            PaymentRepository paymentRepository,
             PasswordEncoder passwordEncoder) {
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
@@ -81,6 +92,7 @@ public class DataInitializer implements CommandLineRunner {
         this.reportRepository = reportRepository;
         this.documentRepository = documentRepository;
         this.employeeRepository = employeeRepository;
+        this.paymentRepository = paymentRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -95,7 +107,8 @@ public class DataInitializer implements CommandLineRunner {
         Map<String, String> roles = Map.of(
                 "ADMIN", "Full system access",
                 "MANAGER", "Manager level access",
-                "EMPLOYEE", "Employee level access"
+                "EMPLOYEE", "Employee level access",
+                "USER", "Storefront customer access"
         );
 
         roles.forEach((name, description) -> {
@@ -113,9 +126,9 @@ public class DataInitializer implements CommandLineRunner {
         Role managerRole = roleRepository.findByName("MANAGER").orElseThrow();
         Role employeeRole = roleRepository.findByName("EMPLOYEE").orElseThrow();
 
-        ensureUser("admin", "admin@aiassistant.com", "Admin", "User", adminRole, true);
-        ensureUser("manager", "manager@aiassistant.com", "Priya", "Sharma", managerRole, true);
-        ensureUser("analyst", "analyst@aiassistant.com", "Rahul", "Mehta", employeeRole, true);
+        ensureUser("admin", "princetyagi9997@gmail.com", "Prince", "Tyagi", adminRole, true, "prince@#1221");
+        ensureUser("manager", "manager@aiassistant.com", "Priya", "Sharma", managerRole, true, "Password@123");
+        ensureUser("analyst", "analyst@aiassistant.com", "Rahul", "Mehta", employeeRole, true, "Password@123");
     }
 
     private void seedBusinessData() {
@@ -158,21 +171,177 @@ public class DataInitializer implements CommandLineRunner {
 
         ensureDocument("Sales Dataset", "sales.csv", "DATASET", admin);
         ensureDocument("Project Analysis Report", "phase-1-project-analysis-report.md", "REPORT", admin);
+
+        seedPayments(admin, manager);
+
+        // Load the Amazon-style storefront catalog (products + stock) from CSV.
+        seedStorefrontCatalog();
     }
 
-    private User ensureUser(String username, String email, String firstName, String lastName, Role role, boolean verified) {
-        return userRepository.findByUsername(username).orElseGet(() -> {
-            User user = new User();
+    /**
+     * Seeds the customer-facing storefront with a rich Amazon-style catalog read from
+     * {@code amazon-products.csv} on the classpath. Each row becomes a Product plus an
+     * Inventory record so the item is immediately available (in stock) in the shop.
+     * Idempotent: an existing SKU is reused (never duplicated) and its display
+     * fields are refreshed from the CSV on every restart.
+     */
+    private void seedStorefrontCatalog() {
+        Supplier marketplace = ensureSupplier(
+                "Amazon Marketplace", "Marketplace Support", "sellers@amazon.example", "Bengaluru", "India");
+
+        ClassPathResource resource = new ClassPathResource("amazon-products.csv");
+        if (!resource.exists()) {
+            return;
+        }
+
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8))) {
+            reader.readLine(); // skip header row
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.isBlank()) {
+                    continue;
+                }
+                List<String> cols = parseCsvLine(line);
+                if (cols.size() < 11) {
+                    continue;
+                }
+                String sku = cols.get(2).trim();
+                if (sku.isEmpty() || sku.equalsIgnoreCase("sku")) {
+                    // Skip blank rows and any stray/duplicate header line.
+                    continue;
+                }
+
+                // Pricing/rating must be numeric; skip a malformed row instead of
+                // aborting the whole application startup.
+                BigDecimal price = parseDecimalSafe(cols.get(4));
+                BigDecimal costPrice = parseDecimalSafe(cols.get(5));
+                BigDecimal mrp = parseDecimalSafe(cols.get(6));
+                BigDecimal rating = parseDecimalSafe(cols.get(8));
+                if (price == null || costPrice == null) {
+                    System.err.println("Skipping storefront row with invalid pricing for SKU: " + sku);
+                    continue;
+                }
+
+                Category category = ensureCategory(cols.get(0).trim(),
+                        cols.get(0).trim() + " products available in the storefront");
+
+                // Reuse the existing product for this SKU so restarts never create
+                // duplicates, but always refresh the display fields (image, pricing,
+                // rating) so edits to amazon-products.csv take effect on restart.
+                Product product = productRepository.findBySku(sku).orElseGet(Product::new);
+                product.setName(cols.get(1).trim());
+                product.setSku(sku);
+                product.setDescription(cols.get(3).trim());
+                product.setCategory(category);
+                product.setPrice(price);
+                product.setCostPrice(costPrice);
+                product.setMrp(mrp);
+                product.setRating(rating);
+                product.setReviewCount(parseIntSafe(cols.get(9).trim()));
+                product.setImageUrl(cols.get(10).trim());
+                Product saved = productRepository.save(product);
+
+                ensureInventory(saved, marketplace, parseIntSafe(cols.get(7).trim()), 20, 50);
+            }
+        } catch (IOException ex) {
+            System.err.println("Failed to seed storefront catalog: " + ex.getMessage());
+        }
+    }
+
+    /** Minimal RFC-4180 style CSV line parser that supports double-quoted fields. */
+    private List<String> parseCsvLine(String line) {
+        List<String> result = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        boolean inQuotes = false;
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+            if (inQuotes) {
+                if (c == '"') {
+                    if (i + 1 < line.length() && line.charAt(i + 1) == '"') {
+                        sb.append('"');
+                        i++;
+                    } else {
+                        inQuotes = false;
+                    }
+                } else {
+                    sb.append(c);
+                }
+            } else if (c == '"') {
+                inQuotes = true;
+            } else if (c == ',') {
+                result.add(sb.toString());
+                sb.setLength(0);
+            } else {
+                sb.append(c);
+            }
+        }
+        result.add(sb.toString());
+        return result;
+    }
+
+    private int parseIntSafe(String value) {
+        try {
+            return Integer.parseInt(value.trim());
+        } catch (NumberFormatException ex) {
+            return 0;
+        }
+    }
+
+    /** Parses a decimal, returning {@code null} for blank or non-numeric input. */
+    private BigDecimal parseDecimalSafe(String value) {
+        if (value == null) {
+            return null;
+        }
+        try {
+            return new BigDecimal(value.trim());
+        } catch (NumberFormatException ex) {
+            return null;
+        }
+    }
+
+    private void seedPayments(User admin, User manager) {
+        if (paymentRepository.count() == 0) {
+            ensurePayment(admin, "38997.00", "6999.46", "45996.46", "SUCCESS", "CARD", "INV-2026-001", "CRM Suite order payment");
+            ensurePayment(manager, "8999.00", "1619.82", "10618.82", "SUCCESS", "UPI", "INV-2026-002", "Scanner Pro purchase");
+            ensurePayment(admin, "15999.00", "2879.82", "18878.82", "CREATED", null, "INV-2026-003", "Dashboard license - pending");
+            ensurePayment(manager, "45000.00", "8100.00", "53100.00", "SUCCESS", "BANK_TRANSFER", "INV-2026-004", "Q2 campaign budget");
+        }
+    }
+
+    private void ensurePayment(User user, String amount, String gst, String total, String status, String method, String invoice, String desc) {
+        Payment payment = new Payment();
+        payment.setUser(user);
+        payment.setAmount(new BigDecimal(amount));
+        payment.setGstAmount(new BigDecimal(gst));
+        payment.setTotalAmount(new BigDecimal(total));
+        payment.setCurrency("INR");
+        payment.setStatus(status);
+        payment.setPaymentMethod(method);
+        payment.setInvoiceNumber(invoice);
+        payment.setDescription(desc);
+        payment.setRazorpayOrderId("order_seed_" + invoice);
+        if ("SUCCESS".equals(status)) {
+            payment.setRazorpayPaymentId("pay_seed_" + invoice);
+            payment.setRazorpaySignature("sig_seed_" + invoice);
+        }
+        paymentRepository.save(payment);
+    }
+
+    private User ensureUser(String username, String email, String firstName, String lastName, Role role, boolean verified, String password) {
+        User user = userRepository.findByUsername(username).orElse(null);
+        if (user == null) {
+            user = new User();
             user.setUsername(username);
-            user.setEmail(email);
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setPassword(passwordEncoder.encode("Password@123"));
-            user.setRole(role);
-            user.setEnabled(true);
-            user.setEmailVerified(verified);
-            return userRepository.save(user);
-        });
+        }
+        user.setEmail(email);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setPassword(passwordEncoder.encode(password));
+        user.setRole(role);
+        user.setEnabled(true);
+        user.setEmailVerified(verified);
+        return userRepository.save(user);
     }
 
     private Customer ensureCustomer(String firstName, String lastName, String email, String phone, String city, String segment, String totalPurchases) {

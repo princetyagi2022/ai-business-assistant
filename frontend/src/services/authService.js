@@ -26,7 +26,7 @@ const authService = {
   verifyEmail: (data) =>
     api.post(API_ENDPOINTS.AUTH.VERIFY_EMAIL, data),
 
-  getMe: () => api.get(API_ENDPOINTS.AUTH.ME).then(unwrap),
+  getMe: () => api.get(API_ENDPOINTS.AUTH.ME, { skipAuthRedirect: true }).then(unwrap),
 
   refresh: () => api.post(API_ENDPOINTS.AUTH.REFRESH).then(unwrap),
 };

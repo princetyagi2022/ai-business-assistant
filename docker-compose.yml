@@ -1,0 +1,128 @@
+version: "3.8"
+
+services:
+  # ==========================
+  # MySQL Database
+  # ==========================
+  mysql:
+    image: mysql:8.0
+    container_name: ai-biz-mysql
+    restart: unless-stopped
+
+    environment:
+      MYSQL_ROOT_PASSWORD: ERprince@12
+      MYSQL_DATABASE: ai_business_assistant
+      MYSQL_ROOT_HOST: "%"
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mysqladmin ping -h localhost -uroot -pERprince@12 || exit 1",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  # ==========================
+  # Spring Boot Backend
+  # ==========================
+  backend:
+    build:
+      context: ./backend
+
+    container_name: ai-biz-backend
+    restart: unless-stopped
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+    ports:
+      - "8081:8081"
+
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+
+      SERVER_PORT: 8081
+
+      DB_URL: jdbc:mysql://mysql:3306/ai_business_assistant?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+
+      DB_USERNAME: root
+      DB_PASSWORD: ERprince@12
+
+      JWT_SECRET: your-secret-key-must-be-at-least-256-bits-long-for-hs256-algorithm
+
+      FRONTEND_URL: http://localhost
+
+      ML_API_BASE_URL: http://ml-models:8000
+
+      CSV_DATA_DIR: /app/ml-models/data
+      CSV_BACKUP_DIR: /app/ml-models/data/backups
+      FILE_UPLOAD_DIR: /app/uploads
+      DOCUMENTS_DIR: /app/documents
+
+      OPENAI_API_KEY: ""
+      RAZORPAY_KEY_ID: ""
+      RAZORPAY_KEY_SECRET: ""
+
+    volumes:
+      - csv_data:/app/ml-models/data
+      - uploads:/app/uploads
+      - documents:/app/documents
+
+  # ==========================
+  # FastAPI ML Service
+  # ==========================
+  ml-models:
+    build:
+      context: ./ml-models
+
+    container_name: ai-biz-ml
+    restart: unless-stopped
+
+    ports:
+      - "8000:8000"
+
+    environment:
+      PORT: 8000
+      OPENAI_API_KEY: ""
+      OPENAI_MODEL: gpt-4
+      ALLOWED_ORIGINS: http://localhost,http://localhost:5173
+
+    volumes:
+      - csv_data:/app/data
+
+  # ==========================
+  # React Frontend
+  # ==========================
+  frontend:
+    build:
+      context: ./frontend
+
+    container_name: ai-biz-frontend
+    restart: unless-stopped
+
+    depends_on:
+      - backend
+      - ml-models
+
+    ports:
+      - "80:80"
+
+    environment:
+      BACKEND_URL: http://backend:8081
+      ML_API_URL: http://ml-models:8000
+
+volumes:
+  mysql_data:
+  csv_data:
+  uploads:
+  documents:

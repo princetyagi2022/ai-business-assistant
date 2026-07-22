@@ -1,3 +1,4 @@
+import os
 import re
 from pathlib import Path
 
@@ -11,9 +12,24 @@ from api.routes.dataset_routes import router as dataset_router
 app = FastAPI(title="AI Business Assistant API")
 DATA_DIR = Path(__file__).resolve().parent / "data"
 
+# OpenAI configuration
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
+OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-4")
+
+# CORS - allow localhost + production origins from env
+ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:80",
+]
+# Append any extra origins from ALLOWED_ORIGINS env var (comma-separated)
+_extra = os.environ.get("ALLOWED_ORIGINS", "")
+if _extra:
+    ALLOWED_ORIGINS.extend(o.strip() for o in _extra.split(",") if o.strip())
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -208,6 +224,36 @@ def auth_ack():
 
 @app.post("/api/chatbot/chat")
 def chatbot_chat(body: ChatRequest):
+    # Try OpenAI first if API key is configured
+    if OPENAI_API_KEY:
+        try:
+            import openai
+            client = openai.OpenAI(api_key=OPENAI_API_KEY)
+            summary = _business_summary(_load_business_data())
+            system_prompt = f"""You are an AI Business Assistant. Help business owners analyze data and make decisions.
+Current business context: {summary}
+Be concise and professional."""
+            response = client.chat.completions.create(
+                model=OPENAI_MODEL,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": body.message}
+                ],
+                max_tokens=1024,
+                temperature=0.7,
+            )
+            reply = response.choices[0].message.content
+            return {
+                "reply": reply,
+                "message": reply,
+                "intent": "ai-assistant",
+                "sessionId": body.sessionId,
+                "source": "openai-gpt4",
+            }
+        except Exception:
+            pass  # Fall through to local response
+
+    # Fallback to local rule-based response
     intent, reply = _answer_business_question(body.message)
     return {
         "reply": reply,

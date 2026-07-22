@@ -356,4 +356,4 @@ CREATE TABLE IF NOT EXISTS employee_tasks (
 
 -- Insert default admin user (password: admin123)
 INSERT INTO users (username, email, password, first_name, last_name, role_id, enabled, email_verified) VALUES 
-('admin', 'admin@aiassistant.com', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iAt6Z5EH', 'Admin', 'User', 1, TRUE, TRUE);
+('admin', 'princetyagi9997@gmail.com', 'prince@#1221', 'Admin', 'User', 1, TRUE, TRUE);

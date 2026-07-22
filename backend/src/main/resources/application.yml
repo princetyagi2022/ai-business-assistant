@@ -3,15 +3,15 @@ spring:
     name: ai-business-assistant
 
   datasource:
-    url: jdbc:mysql://localhost:3306/ai_business_assistant?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
-    username: root
-    password: ERprince@12
+    url: ${DB_URL:jdbc:mysql://localhost:3306/ai_business_assistant?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:ERprince@12}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
@@ -23,10 +23,10 @@ spring:
       max-request-size: 50MB
 
   mail:
-    host: smtp.gmail.com
-    port: 587
-    username: ${EMAIL_USERNAME}
-    password: ${EMAIL_PASSWORD}
+    host: ${EMAIL_HOST:smtp.gmail.com}
+    port: ${EMAIL_PORT:587}
+    username: ${EMAIL_USERNAME:}
+    password: ${EMAIL_PASSWORD:}
     properties:
       mail:
         smtp:
@@ -35,46 +35,48 @@ spring:
             enable: true
 
 server:
-  port: 8081
+  port: ${SERVER_PORT:8081}
   servlet:
     context-path: /api
 
-# JWT Configuration
 jwt:
-  secret: your-secret-key-must-be-at-least-256-bits-long-for-hs256-algorithm
-  expiration: 86400000 # 24 hours in milliseconds
+  secret: ${JWT_SECRET:your-secret-key-must-be-at-least-256-bits-long-for-hs256-algorithm}
+  expiration: ${JWT_EXPIRATION:86400000}
+  refresh-expiration: ${JWT_REFRESH_EXPIRATION:604800000}
 
-# AI Configuration
 ai:
   openai:
-    api-key: ${OPENAI_API_KEY}
-    model: gpt-4
-  ollama:
-    base-url: http://localhost:11434
-    model: llama2
-  chromadb:
-    host: localhost
-    port: 8000
+    api-key: ${OPENAI_API_KEY:}
+    model: ${OPENAI_MODEL:gpt-4}
+  ml:
+    base-url: ${ML_API_BASE_URL:http://localhost:8000}
 
-# ML API Configuration
-ml:
-  api:
-    base-url: http://localhost:5000
+razorpay:
+  key-id: ${RAZORPAY_KEY_ID:rzp_test_TCyhbdilYQrSOn}
+  key-secret: ${RAZORPAY_KEY_SECRET:mCiDkRA66IqH8bw3Twu4kXeh}
+  webhook-secret: ${RAZORPAY_WEBHOOK_SECRET:}
 
-# RAG Configuration
-rag:
-  chunk-size: 500
-  chunk-overlap: 50
-  embedding-model: all-minilm-l6-v2
+csv:
+  data-dir: ${CSV_DATA_DIR:../ml-models/data}
+  backup-dir: ${CSV_BACKUP_DIR:../ml-models/data/backups}
 
-# File Upload Configuration
 file:
-  upload-dir: ./uploads
-  documents-dir: ./documents
+  upload-dir: ${FILE_UPLOAD_DIR:./uploads}
+  documents-dir: ${DOCUMENTS_DIR:./documents}
 
-# Logging
+app:
+  frontend-url: ${FRONTEND_URL:http://localhost:5173}
+  cors-extra-origins: ${CORS_EXTRA_ORIGINS:}
+  rate-limit:
+    requests-per-minute: ${RATE_LIMIT_RPM:120}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
 logging:
   level:
-    com.ai.assistant: DEBUG
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    com.ai.assistant: INFO
+    org.hibernate.SQL: WARN

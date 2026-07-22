@@ -22,3 +22,13 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Maven / Gradle build output (never commit)
+target/
+build/
+
+# Local secrets / credential run scripts (never commit)
+backend/run-tidb.ps1
+*.env
+.env
+.env.local

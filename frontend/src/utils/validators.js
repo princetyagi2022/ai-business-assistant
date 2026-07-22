@@ -12,7 +12,10 @@ export const passwordSchema = yup
   .required('Password is required');
 
 export const loginSchema = yup.object({
-  email: emailSchema,
+  email: yup
+    .string()
+    .trim()
+    .required('Email or username is required'),
   password: passwordSchema,
 });
 
@@ -52,6 +55,40 @@ export const userFormSchema = yup.object({
   firstName: yup.string().trim().required('First name is required'),
   lastName: yup.string().trim().required('Last name is required'),
   email: emailSchema,
+  phone: yup.string().trim().nullable(),
   role: yup.string().required('Role is required'),
   status: yup.string().required('Status is required'),
+  password: yup.string().nullable(),
+});
+
+const emptyToNull = (value, original) => (String(original).trim() === '' ? null : value);
+
+export const productFormSchema = yup.object({
+  name: yup.string().trim().required('Product name is required'),
+  category: yup.string().trim().required('Category is required'),
+  price: yup
+    .number()
+    .typeError('Enter a valid price')
+    .positive('Price must be greater than 0')
+    .required('Selling price is required'),
+  discountPercent: yup
+    .number()
+    .typeError('Enter a valid discount')
+    .min(0, 'Discount cannot be negative')
+    .max(99, 'Discount must be less than 100')
+    .nullable()
+    .transform(emptyToNull),
+  stock: yup
+    .number()
+    .typeError('Enter a valid stock quantity')
+    .integer('Stock must be a whole number')
+    .min(0, 'Stock cannot be negative')
+    .required('Stock quantity is required'),
+  imageUrl: yup
+    .string()
+    .trim()
+    .url('Enter a valid image URL')
+    .nullable()
+    .transform(emptyToNull),
+  description: yup.string().trim().nullable(),
 });

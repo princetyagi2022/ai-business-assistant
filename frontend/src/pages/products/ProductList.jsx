@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Alert, Box, Chip, CircularProgress } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { Alert, Box, Button, Chip, CircularProgress } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import PageHeader from '@/components/common/PageHeader';
 import DataTable from '@/components/common/DataTable';
 import TablePagination from '@/components/common/Pagination';
@@ -19,6 +21,7 @@ const columns = [
 ];
 
 const ProductList = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -59,7 +62,15 @@ const ProductList = () => {
 
   return (
     <>
-      <PageHeader title="Products" subtitle="Product catalog and pricing" />
+      <PageHeader
+        title="Products"
+        subtitle="Product catalog and pricing"
+        actions={(
+          <Button variant="contained" startIcon={<AddIcon />} onClick={() => navigate('/products/create')}>
+            New Product
+          </Button>
+        )}
+      />
       <TableToolbar
         search={search}
         onSearchChange={setSearch}

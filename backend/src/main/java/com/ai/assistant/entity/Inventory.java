@@ -3,7 +3,9 @@ package com.ai.assistant.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -25,10 +27,14 @@ public class Inventory {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id", nullable = false, unique = true)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Product product;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supplier_id")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Supplier supplier;
     
     @Column(name = "quantity_in_stock", nullable = false)

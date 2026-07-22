@@ -8,14 +8,14 @@ import FormTextField from '@/components/forms/FormTextField';
 import PasswordField from '@/components/forms/PasswordField';
 import { loginSchema } from '@/utils/validators';
 import { useAuth } from '@/context/AuthContext';
-import { DEMO_CREDENTIALS, DEMO_MODE } from '@/utils/constants';
+import { DEMO_CREDENTIALS, DEMO_MODE, ROLES } from '@/utils/constants';
 
 const LoginPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [submitError, setSubmitError] = useState('');
-  const from = location.state?.from?.pathname || '/dashboard';
+  const from = location.state?.from?.pathname;
 
   const { control, handleSubmit, formState: { isSubmitting } } = useForm({
     resolver: yupResolver(loginSchema),
@@ -25,8 +25,13 @@ const LoginPage = () => {
   const onSubmit = async (data) => {
     setSubmitError('');
     const result = await login(data);
-    if (result.success) navigate(from, { replace: true });
-    else setSubmitError(result.error);
+    if (result.success) {
+      // Normal shoppers never see the business dashboard; send them to the storefront.
+      const landing = result.role === ROLES.USER ? '/shop' : (from || '/dashboard');
+      navigate(landing, { replace: true });
+    } else {
+      setSubmitError(result.error);
+    }
   };
 
   return (

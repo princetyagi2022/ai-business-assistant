@@ -12,10 +12,30 @@ import {
 } from '@mui/material';
 import { navItems } from '@/routes/routeConfig';
 import { APP_NAME } from '@/utils/constants';
+import { useAuth } from '@/context/AuthContext';
 
 const navLinkClass = ({ isActive }) => (isActive ? 'nav-link active' : 'nav-link');
 
-const DrawerContent = ({ onNavigate }) => (
+// Filter items by the current role and collapse redundant dividers so that a
+// storefront user does not see empty separators.
+const visibleFor = (role) => {
+  const filtered = navItems.filter((item) => !item.roles || (role && item.roles.includes(role)));
+  const result = [];
+  filtered.forEach((item) => {
+    if (item.divider) {
+      const prev = result[result.length - 1];
+      if (!prev || prev.divider) return;
+    }
+    result.push(item);
+  });
+  while (result.length && result[result.length - 1].divider) result.pop();
+  return result;
+};
+
+const DrawerContent = ({ onNavigate }) => {
+  const { user } = useAuth();
+  const items = visibleFor(user?.role);
+  return (
   <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
     <Toolbar sx={{ px: 2 }}>
       <Typography variant="h6" fontWeight={700} noWrap color="primary">
@@ -24,7 +44,7 @@ const DrawerContent = ({ onNavigate }) => (
     </Toolbar>
     <Divider />
     <List sx={{ flex: 1, px: 1, py: 1 }}>
-      {navItems.map((item, index) => {
+      {items.map((item, index) => {
         if (item.divider) return <Divider key={`div-${index}`} sx={{ my: 1 }} />;
         const Icon = item.icon;
         return (
@@ -53,7 +73,8 @@ const DrawerContent = ({ onNavigate }) => (
       })}
     </List>
   </Box>
-);
+  );
+};
 
 const Sidebar = ({ drawerWidth, mobileOpen, onClose, isMobile }) => (
   <Box

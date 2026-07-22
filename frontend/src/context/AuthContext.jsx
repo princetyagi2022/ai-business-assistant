@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
         setToken(token);
         setStoredUser(demoUser);
         setUser(demoUser);
-        return { success: true };
+        return { success: true, role: demoUser.role };
       }
 
       const { data } = await authService.login({ email, password });
@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
       setToken(token);
       setStoredUser(authUser);
       setUser(authUser);
-      return { success: true };
+      return { success: true, role: authUser.role };
     } catch (err) {
       const message = err.response?.data?.message || err.message || 'Login failed';
       setError(message);
@@ -97,30 +97,46 @@ export const AuthProvider = ({ children }) => {
   );
 
   useEffect(() => {
+    let cancelled = false;
     const init = async () => {
       const token = getToken();
       const stored = getStoredUser();
       if (!token) {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
         return;
       }
       if (token.startsWith('demo-token')) {
-        setUser(stored);
-        setLoading(false);
+        if (!cancelled) {
+          setUser(stored);
+          setLoading(false);
+        }
         return;
       }
       try {
         const me = await authService.getMe();
-        setUser(me);
-        setStoredUser(me);
+        if (!cancelled) {
+          setUser(me);
+          setStoredUser(me);
+        }
       } catch {
-        storage.clearAuth();
-        setUser(null);
+        if (!cancelled) {
+          storage.clearAuth();
+          setUser(null);
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     };
     init();
+    // Safety timeout: always stop loading after 5 seconds
+    const timeout = setTimeout(() => {
+      cancelled = false;
+      setLoading(false);
+    }, 5000);
+    return () => {
+      cancelled = true;
+      clearTimeout(timeout);
+    };
   }, []);
 
   const value = useMemo(

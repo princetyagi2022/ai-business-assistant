@@ -14,8 +14,8 @@ const Forbidden = () => {
       <Typography color="text.secondary" sx={{ mb: 3 }}>
         You do not have permission to view this page.
       </Typography>
-      <Button variant="contained" onClick={() => navigate('/dashboard')}>
-        Go to Dashboard
+      <Button variant="contained" onClick={() => navigate('/')}>
+        Go Home
       </Button>
     </Box>
   );

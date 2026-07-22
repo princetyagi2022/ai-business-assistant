@@ -5,6 +5,7 @@ set "ROOT=%~dp0"
 set "ML_DIR=%ROOT%ml-models"
 set "FRONTEND_DIR=%ROOT%frontend"
 set "BACKEND_DIR=%ROOT%backend"
+set "DB_PASSWORD=ERprince@12"
 
 echo Starting AI Business Assistant...
 echo.
@@ -25,8 +26,8 @@ if errorlevel 1 (
     echo [WARN] MySQL is not listening on port 3306. Spring Boot backend will be skipped.
     echo        Start MySQL first if you want the Java backend too.
   ) else (
-    echo [OK] Starting Spring Boot backend on http://localhost:8080/api
-    start "AI Business Assistant - Spring Backend" cmd /k "cd /d "%BACKEND_DIR%" && mvn spring-boot:run"
+    echo [OK] Starting Spring Boot backend on http://localhost:8081/api
+    start "AI Business Assistant - Spring Backend" cmd /k "set DB_PASSWORD=ERprince@12 && cd /d "%BACKEND_DIR%" && mvn spring-boot:run -Dspring-boot.run.profiles=dev"
   )
 )
 

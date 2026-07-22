@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, TextField, IconButton, Paper } from '@mui/material';
+import { TextField, IconButton, Paper } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 
 const ChatInput = ({ onSend, disabled }) => {

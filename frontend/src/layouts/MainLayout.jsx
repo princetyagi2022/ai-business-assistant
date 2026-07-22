@@ -26,8 +26,8 @@ const MainLayout = () => {
         component="main"
         sx={{
           flexGrow: 1,
+          minWidth: 0,
           width: { md: `calc(100% - ${DRAWER_WIDTH}px)` },
-          ml: { md: `${DRAWER_WIDTH}px` },
           bgcolor: 'background.default',
         }}
       >

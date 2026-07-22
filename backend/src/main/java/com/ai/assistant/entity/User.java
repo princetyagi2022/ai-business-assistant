@@ -35,6 +35,9 @@ public class User {
     @Column(name = "phone", length = 20)
     private String phone;
 
+    @Column(name = "profile_image_url", length = 500)
+    private String profileImageUrl;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
@@ -98,6 +101,10 @@ public class User {
         return phone;
     }
 
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -157,6 +164,10 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
     }
 
     public void setRole(Role role) {

@@ -1,0 +1,10 @@
+id,first_name,last_name,email,role,status,profile_image_url
+1,Prince,Tyagi,princetyagi9997@gmail.com,admin,active,
+2,Priya,Sharma,manager@aiassistant.com,manager,active,
+3,Rahul,Mehta,analyst@aiassistant.com,employee,active,
+5,Shop,Tester,shopper_2076776320@example.com,user,active,
+6,Shop,Tester,shopper_1509399637@example.com,user,active,
+12,Prajjwal,Yadev,prajjwal001@gmail.com,manager,active,
+13,Prince,Tyagi,princetyagi0001@gmail.com,user,active,
+14,Utsha,Singh,utsha001@gmail.com,employee,active,
+15,Diag,User,diag_user01@example.com,user,active,

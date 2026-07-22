@@ -7,7 +7,6 @@ import {
   TableRow,
   Paper,
   Checkbox,
-  Box,
 } from '@mui/material';
 import EmptyState from './EmptyState';
 

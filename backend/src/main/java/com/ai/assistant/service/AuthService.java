@@ -67,7 +67,10 @@ public class AuthService {
             throw new IllegalArgumentException("Username is already taken");
         }
 
-        Role role = roleRepository.findByName(resolveRoleName(request.getRoleName()))
+        // Self-registration always creates a normal storefront customer (USER).
+        // Elevated roles (ADMIN/MANAGER/EMPLOYEE) can only be assigned by an admin
+        // through the user-management endpoints.
+        Role role = roleRepository.findByName("USER")
                 .orElseThrow(() -> new IllegalStateException("Default role not found"));
 
         User user = new User();
@@ -105,17 +108,6 @@ public class AuthService {
         return email.substring(0, email.indexOf('@')).replaceAll("[^a-zA-Z0-9_]", "_").toLowerCase(Locale.ROOT);
     }
 
-    private String resolveRoleName(String roleName) {
-        if (roleName == null || roleName.isBlank()) {
-            return "EMPLOYEE";
-        }
-        String normalized = roleName.trim().toUpperCase(Locale.ROOT).replace("ROLE_", "");
-        if ("ADMIN".equals(normalized) || "MANAGER".equals(normalized) || "EMPLOYEE".equals(normalized)) {
-            return normalized;
-        }
-        return "EMPLOYEE";
-    }
-
     private JwtResponse toJwtResponse(String token, User user) {
         return new JwtResponse(
                 token,
@@ -137,6 +129,7 @@ public class AuthService {
                 user.getFirstName(),
                 user.getLastName(),
                 user.getPhone(),
+                user.getProfileImageUrl(),
                 "ROLE_" + user.getRole().getName(),
                 user.getEnabled(),
                 user.getEmailVerified(),

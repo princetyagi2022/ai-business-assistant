@@ -1,6 +1,6 @@
 export const APP_NAME = import.meta.env.VITE_APP_NAME || 'AI Business Assistant';
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
-export const ML_API_BASE_URL = import.meta.env.VITE_ML_API_BASE_URL || '/api';
+export const ML_API_BASE_URL = import.meta.env.VITE_ML_API_BASE_URL || '/ml-api';
 export const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === 'true';
 
 export const STORAGE_KEYS = {
@@ -47,7 +47,18 @@ export const API_ENDPOINTS = {
   NOTIFICATIONS: '/notifications',
   DASHBOARD: '/dashboard',
   AGENTS: '/agents',
+  PAYMENTS: '/payments',
+  SHOP: {
+    CATALOG: '/shop/catalog',
+    ORDERS: '/shop/orders',
+  },
+  MY_ORDERS: '/my/orders',
 };
+
+// Roles that see the internal business console (dashboard, users, inventory, etc.)
+export const STAFF_ROLES = [ROLES.ADMIN, ROLES.MANAGER, ROLES.EMPLOYEE];
+// Roles allowed to manage staff accounts.
+export const STAFF_MANAGER_ROLES = [ROLES.ADMIN, ROLES.MANAGER];
 
 export const PAGINATION_DEFAULTS = {
   page: 0,

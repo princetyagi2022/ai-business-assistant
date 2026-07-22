@@ -1,86 +1,238 @@
-# AI Business Assistant: One-Click Run And Free Hosting
+# AI Business Assistant: Deployment Guide
 
-## One-click local run on Windows
+## Architecture Overview
 
-Double-click:
-
-```text
-start-project.bat
+```
+┌────────────────┐     ┌────────────────────┐     ┌───────────────────┐
+│  React + Vite  │────▶│  Spring Boot API   │────▶│  MySQL Database   │
+│   (Frontend)   │     │  (Backend :8081)   │     │    (:3306)        │
+│   nginx :80    │     └────────────────────┘     └───────────────────┘
+└────────────────┘              │
+                                ▼
+                    ┌────────────────────┐
+                    │  FastAPI ML Service │
+                    │     (:8000)        │
+                    └────────────────────┘
 ```
 
-It starts:
+---
 
-- FastAPI data/ML service: `http://localhost:8000`
-- React frontend: `http://localhost:5173`
-- Spring Boot backend: `http://localhost:8080/api`, only when MySQL is already running on port `3306`
+## 1. Local Development
 
-To stop local services, double-click:
+### Prerequisites
+- Java 21 (Eclipse Temurin)
+- Node.js 18+
+- Python 3.11+
+- MySQL 8.0+
 
-```text
-stop-project.bat
+### Quick Start (Windows)
+
+Double-click `start-project.bat` to launch all three services:
+
+| Service | URL |
+|---------|-----|
+| React Frontend | http://localhost:5173 |
+| Spring Boot API | http://localhost:8081/api |
+| FastAPI ML Service | http://localhost:8000 |
+
+### Manual Start
+
+```bash
+# 1. Start MySQL first
+# 2. Backend
+cd backend
+mvn spring-boot:run -Dspring-boot.run.profiles=dev
+
+# 3. ML Service
+cd ml-models
+pip install -r requirements.txt
+uvicorn main:app --reload --port 8000
+
+# 4. Frontend
+cd frontend
+npm install
+npm run dev
 ```
 
-## Free public hosting plan
+---
 
-Recommended beginner-friendly split:
+## 2. Local Docker Compose
 
-1. Host FastAPI backend on Render as a free web service.
-2. Host React frontend on Vercel or Netlify as a free static site.
-3. Set frontend environment variables to point to the Render backend URL.
+Run all services (including MySQL) in one command:
 
-### Deploy FastAPI to Render
-
-Create a new Render Web Service from the GitHub repo.
-
-Use these settings:
-
-```text
-Root Directory: ml-models
-Build Command: pip install -r requirements.txt
-Start Command: uvicorn main:app --host 0.0.0.0 --port $PORT
+```bash
+docker-compose up --build
 ```
 
-After deployment, Render gives a URL like:
+| Service | URL |
+|---------|-----|
+| Frontend (nginx) | http://localhost |
+| Backend API | http://localhost:8081/api |
+| ML Service | http://localhost:8000 |
+| MySQL | localhost:3306 |
 
-```text
-https://ai-business-assistant-api.onrender.com
+Set API keys before running:
+
+```bash
+# Edit docker-compose.yml environment section, or use:
+OPENAI_API_KEY=sk-xxx docker-compose up --build
 ```
 
-Your API base URL will be:
+---
 
-```text
-https://ai-business-assistant-api.onrender.com/api
-```
+## 3. Cloud Deployment (Free Tier)
 
-### Deploy React frontend to Vercel
+### Option A: Frontend on Vercel + Backend on Render
 
-Create a Vercel project from the GitHub repo.
+#### Step 1: Deploy FastAPI ML Service to Render
 
-Use these settings:
+1. Create a Render account at https://render.com
+2. Click **New → Web Service**, connect your GitHub repo
+3. Configure:
 
-```text
-Root Directory: frontend
-Build Command: npm run build
-Output Directory: dist
-```
+| Setting | Value |
+|---------|-------|
+| Root Directory | `ml-models` |
+| Build Command | `pip install -r requirements.txt` |
+| Start Command | `uvicorn main:app --host 0.0.0.0 --port $PORT` |
+| Plan | Free |
 
-Add environment variables:
+4. Add environment variables:
 
-```text
-VITE_API_BASE_URL=https://your-render-service.onrender.com/api
-VITE_ML_API_BASE_URL=https://your-render-service.onrender.com/api
-VITE_APP_NAME=AI Business Assistant
-VITE_DEMO_MODE=true
-```
+| Key | Value |
+|-----|-------|
+| `OPENAI_API_KEY` | Your OpenAI API key |
+| `OPENAI_MODEL` | `gpt-4` |
+| `ALLOWED_ORIGINS` | `https://your-app.vercel.app` |
 
-Vercel gives a public link like:
+5. Deploy and note your URL: `https://your-ml-service.onrender.com`
 
-```text
-https://ai-business-assistant.vercel.app
-```
+#### Step 2: Deploy Spring Boot Backend to Render
 
-Share that link with others.
+1. Click **New → Web Service**, connect your GitHub repo
+2. Configure:
 
-### Important
+| Setting | Value |
+|---------|-------|
+| Root Directory | `backend` |
+| Build Command | `mvn clean package -DskipTests` |
+| Start Command | `java -jar target/*.jar` |
+| Plan | Free |
 
-Free hosting services may sleep after inactivity. The first request can be slow while the API wakes up.
+3. Add environment variables:
+
+| Key | Value |
+|-----|-------|
+| `DB_URL` | `jdbc:mysql://your-db-host/ai_business_assistant?...` |
+| `DB_USERNAME` | Your DB username |
+| `DB_PASSWORD` | Your DB password |
+| `JWT_SECRET` | A long random string |
+| `FRONTEND_URL` | `https://your-app.vercel.app` |
+| `CORS_EXTRA_ORIGINS` | `https://your-app.vercel.app` |
+| `ML_API_BASE_URL` | `https://your-ml-service.onrender.com` |
+| `OPENAI_API_KEY` | Your OpenAI API key |
+| `SPRING_PROFILES_ACTIVE` | `prod` |
+
+4. Deploy and note your URL: `https://your-backend.onrender.com`
+
+#### Step 3: Deploy MySQL Database
+
+**Option 1: Railway (recommended)**
+1. Go to https://railway.app → New Project → MySQL
+2. Copy the connection details (host, port, user, password, database)
+3. Use these in the Render backend env vars
+
+**Option 2: Aiven Free Tier**
+1. Go to https://aiven.io → Create Free MySQL service
+2. Copy the connection URL
+3. Use it as `DB_URL` in Render
+
+**Option 3: PlanetScale**
+1. Go to https://planetscale.com → Create database
+2. Use the connection string
+
+#### Step 4: Deploy React Frontend to Vercel
+
+1. Go to https://vercel.com → **New Project**, import your GitHub repo
+2. Configure:
+
+| Setting | Value |
+|---------|-------|
+| Root Directory | `frontend` |
+| Build Command | `npm run build` |
+| Output Directory | `dist` |
+
+3. Add environment variables:
+
+| Key | Value |
+|-----|-------|
+| `VITE_API_BASE_URL` | `https://your-backend.onrender.com/api` |
+| `VITE_ML_API_BASE_URL` | `https://your-ml-service.onrender.com/api` |
+| `VITE_APP_NAME` | `AI Business Assistant` |
+| `VITE_DEMO_MODE` | `false` |
+| `VITE_RAZORPAY_KEY_ID` | Your Razorpay key (optional) |
+
+4. Deploy! Your app is live at: `https://your-app.vercel.app`
+
+---
+
+### Option B: All-in-One Docker on Railway / Fly.io
+
+1. Push the entire project to GitHub
+2. On Railway or Fly.io, create a new project from the repo
+3. Point to `docker-compose.yml`
+4. Set environment variables for API keys and DB credentials
+5. Deploy
+
+---
+
+## 4. Environment Variables Reference
+
+### Backend (Spring Boot)
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `SERVER_PORT` | `8081` | Server port |
+| `SPRING_PROFILES_ACTIVE` | `dev` | Spring profile (dev/prod) |
+| `DB_URL` | `jdbc:mysql://localhost:3306/...` | MySQL connection URL |
+| `DB_USERNAME` | `root` | Database username |
+| `DB_PASSWORD` | _(empty)_ | Database password |
+| `JWT_SECRET` | _(built-in)_ | JWT signing secret |
+| `OPENAI_API_KEY` | _(empty)_ | OpenAI API key for GPT-4 |
+| `OPENAI_MODEL` | `gpt-4` | OpenAI model name |
+| `ML_API_BASE_URL` | `http://localhost:8000` | ML service URL |
+| `FRONTEND_URL` | `http://localhost:5173` | Frontend URL (CORS) |
+| `CORS_EXTRA_ORIGINS` | _(empty)_ | Extra CORS origins (comma-separated) |
+| `RAZORPAY_KEY_ID` | _(empty)_ | Razorpay key ID |
+| `RAZORPAY_KEY_SECRET` | _(empty)_ | Razorpay key secret |
+| `CSV_DATA_DIR` | `../ml-models/data` | CSV data directory |
+
+### Frontend (React)
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `VITE_API_BASE_URL` | `http://localhost:8081/api` | Backend API URL |
+| `VITE_ML_API_BASE_URL` | `http://localhost:8000/api` | ML API URL |
+| `VITE_APP_NAME` | `AI Business Assistant` | App display name |
+| `VITE_DEMO_MODE` | `false` | Enable demo mode (no auth required) |
+| `VITE_RAZORPAY_KEY_ID` | _(empty)_ | Razorpay public key |
+
+### ML Service (FastAPI)
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `PORT` | `8000` | Service port |
+| `OPENAI_API_KEY` | _(empty)_ | OpenAI API key |
+| `OPENAI_MODEL` | `gpt-4` | OpenAI model name |
+| `ALLOWED_ORIGINS` | _(empty)_ | Extra CORS origins (comma-separated) |
+
+---
+
+## 5. Important Notes
+
+- **Free tier cold starts**: Render and Railway free tiers sleep after inactivity. First request may take 30-60 seconds.
+- **Database**: MySQL must be accessible from the backend service. Use a cloud database, not localhost.
+- **CORS**: Both backend and ML service CORS are configured to accept the production frontend URL via environment variables.
+- **CSV Sync**: The backend writes to CSV files in `CSV_DATA_DIR`. In Docker, this is a shared volume between backend and ML service.
+- **File Uploads**: Upload directory (`FILE_UPLOAD_DIR`) should be a persistent volume in production.
+- **Security**: Never commit API keys to Git. Always use environment variables.

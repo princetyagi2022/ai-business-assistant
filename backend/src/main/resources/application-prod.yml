@@ -1,13 +1,35 @@
 spring:
-  datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-  
-  jpa:
-    show-sql: false
+  application:
+    name: ai-business-assistant
 
-logging:
-  level:
-    com.ai.assistant: INFO
-    org.hibernate.SQL: WARN
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/ai_business_assistant?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: ${SERVER_PORT:8081}
+  servlet:
+    context-path: /api
+
+jwt:
+  secret: ${JWT_SECRET:}
+  expiration: 86400000
+
+razorpay:
+  key-id: ${RAZORPAY_KEY_ID:}
+  key-secret: ${RAZORPAY_KEY_SECRET:}
+
+openai:
+  api-key: ${OPENAI_API_KEY:}
+  model: ${OPENAI_MODEL:gpt-4}

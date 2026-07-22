@@ -6,14 +6,17 @@ import { Alert, Box, Button, Card, CardContent, CircularProgress } from '@mui/ma
 import PageHeader from '@/components/common/PageHeader';
 import FormTextField from '@/components/forms/FormTextField';
 import FormSelect from '@/components/forms/FormSelect';
+import PasswordField from '@/components/forms/PasswordField';
 import { userFormSchema } from '@/utils/validators';
 import { ROLES } from '@/utils/constants';
+import { useAuth } from '@/context/AuthContext';
 import userService from '@/services/userService';
 
-const roleOptions = Object.entries(ROLES).map(([key, value]) => ({
-  value,
-  label: key.charAt(0) + key.slice(1).toLowerCase(),
-}));
+const allRoleOptions = [
+  { value: ROLES.ADMIN, label: 'Admin' },
+  { value: ROLES.MANAGER, label: 'Manager' },
+  { value: ROLES.EMPLOYEE, label: 'Employee' },
+];
 
 const statusOptions = [
   { value: 'ACTIVE', label: 'Active' },
@@ -23,13 +26,19 @@ const statusOptions = [
 const EditUser = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { hasRole } = useAuth();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // A manager may only manage employee accounts; admin can manage any staff role.
+  const roleOptions = hasRole(ROLES.ADMIN)
+    ? allRoleOptions
+    : allRoleOptions.filter((option) => option.value === ROLES.EMPLOYEE);
+
   const { control, handleSubmit, reset, formState: { isSubmitting } } = useForm({
     resolver: yupResolver(userFormSchema),
-    defaultValues: { firstName: '', lastName: '', email: '', role: ROLES.USER, status: 'ACTIVE' },
+    defaultValues: { firstName: '', lastName: '', email: '', phone: '', password: '', role: ROLES.EMPLOYEE, status: 'ACTIVE' },
   });
 
   useEffect(() => {
@@ -40,14 +49,16 @@ const EditUser = () => {
         const data = await userService.getById(id);
         setUser(data);
         reset({
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
-          role: data.role,
-          status: data.status,
+          firstName: data.firstName || '',
+          lastName: data.lastName || '',
+          email: data.email || '',
+          phone: data.phone || '',
+          password: '',
+          role: data.role || ROLES.EMPLOYEE,
+          status: data.status || 'ACTIVE',
         });
       } catch (err) {
-        setError(err.response?.data?.detail || 'Failed to load user.');
+        setError(err.response?.data?.message || 'Failed to load user.');
       } finally {
         setLoading(false);
       }
@@ -57,8 +68,13 @@ const EditUser = () => {
   }, [id, reset]);
 
   const onSubmit = async (values) => {
-    await userService.update(id, values);
-    navigate(`/users/${id}`);
+    setError(null);
+    try {
+      await userService.update(id, values);
+      navigate(`/users/${id}`);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to update user.');
+    }
   };
 
   if (loading) {
@@ -69,8 +85,8 @@ const EditUser = () => {
     );
   }
 
-  if (error || !user) {
-    return <Alert severity="error">{error || 'User not found'}</Alert>;
+  if (error && !user) {
+    return <Alert severity="error">{error}</Alert>;
   }
 
   return (
@@ -79,16 +95,19 @@ const EditUser = () => {
         title="Edit User"
         breadcrumbs={[
           { label: 'Users', to: '/users' },
-          { label: user.firstName, to: `/users/${id}` },
+          { label: user?.firstName || '', to: `/users/${id}` },
           { label: 'Edit' },
         ]}
       />
       <Card sx={{ maxWidth: 600 }}>
         <CardContent>
+          {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
           <Box component="form" onSubmit={handleSubmit(onSubmit)}>
             <FormTextField name="firstName" control={control} label="First name" />
             <FormTextField name="lastName" control={control} label="Last name" />
             <FormTextField name="email" control={control} label="Email" type="email" />
+            <FormTextField name="phone" control={control} label="Phone" />
+            <PasswordField name="password" control={control} label="New password (leave blank to keep current)" />
             <FormSelect name="role" control={control} label="Role" options={roleOptions} />
             <FormSelect name="status" control={control} label="Status" options={statusOptions} />
             <Box sx={{ mt: 2, display: 'flex', gap: 1 }}>
@@ -107,3 +126,4 @@ const EditUser = () => {
 };
 
 export default EditUser;
+
